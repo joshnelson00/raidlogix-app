@@ -1,9 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <link rel="stylesheet" href="static/main.css">
+        <title>Test</title>
+        <link rel="shortcut icon" href="#">
+    </head>
+    <div id="header">
+        <h2 id="header_title"><a href="#">RAIDLOGIX</a></h2>
+        <div id="navbar">
+            <ul >
+                <li><a href="#">About</a></li>
+                <li><a href="#">Projects</a></li>
+                <li><a href="#">Profile</a></li>
+            </ul>
+        </div>
+    </div>
+    <body>
+        
+    
+        {% block content %}
+        {% endblock content %}
 
-<body>
-Hello
-</body>
+    </body>
 
-
+    <div id="footer">
+        <div id="footer_line"></div>
+        
+        <h3>RAIDLOGIX</h3>
+        <div id="footer_list">
+            <ul>
+                <li><a href="mailto:joshuaknelson1202@icloud.com">Email</a></li>
+                <li>|</li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li>|</li>
+                <li><a href="https://linkedin.com/in/joshuanelson01">Connect Here</a></li>
+                <li>|</li>
+                <li><a href="https://github.com/joshnelson00">Github</a></li>
+            </ul>
+        </div>
+        
+        
+    </div>
 </html>
