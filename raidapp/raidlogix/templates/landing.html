@@ -6,10 +6,9 @@
         <div id="landing-wrapper">
             <div id="login-text">LOGIN</div>
             <div class="login-wrapper">
-                <div class="login-button"><a>&nbsp;Sign In&nbsp;</a></div>
-                <div class="login-button"><a>Create Account</a></div>
+                <div class="login-button"><a href="{% url 'sign_in' %}">Sign In</a></div>
+                <div class="login-button"><a href="{% url 'create_account' %}">Create Account</a></div>
             </div>
         </div>
     </div>
-
 {% endblock content %}

@@ -1,0 +1,22 @@
+{% extends 'login-template.html' %}
+
+{% block content %}
+    <div id="block-sign-in">
+        <h1 class="cool-text">Sign In</h1>
+
+        <div class="sign-in-form">
+            <form action="" method="post" class="form-fields">
+                {% csrf_token %}
+                <div class="sign-in-fields-wrapper">
+                    {{form.username.label}}
+                    {{form.username}}
+                </div>
+                    <div class="sign-in-fields-wrapper">
+                    {{form.password.label}}
+                    {{form.password}}
+                </div>
+                <a href="#" id="sign-in-submit"><input id="sign-in-submit" type="submit" value="Sign In"/></a>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

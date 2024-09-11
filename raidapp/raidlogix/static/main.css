@@ -215,13 +215,18 @@ body {
     right:40%;
 }
 
+#login-logo a{
+    color: #ffffff;
+    text-decoration: none;
+}
+
 #block-landing {
     display: flex;
     flex-direction: column;
     align-items: center;
     height: auto;
     width: auto;
-    margin-bottom: 2%;
+    margin-bottom: auto;
 }
 #landing-wrapper {
     display: flex;
@@ -230,7 +235,7 @@ body {
     text-align: center;
     height: auto;
     width: auto;
-    margin-top: 6%;
+    margin-top: 5%;
 }
 
 .login-wrapper {
@@ -247,9 +252,7 @@ body {
     padding-top: 3%;
     border-radius: 25px;
     margin: 0%;
-    margin-bottom: 14%;
-    
-    
+    margin-bottom: 20%;
 }
 #login-text {
     color: white;
@@ -257,6 +260,9 @@ body {
     font-family: "Request";
     margin: 0%;
 }
+
+
+
 .login-button {
     text-align: center;
     border: 4px solid #3C096C;
@@ -275,10 +281,170 @@ body {
     white-space: nowrap;
 }
 
+.login-button a{
+    text-decoration: none;
+    color: white;
+}
+.login-button a:hover{
+    text-decoration: none;
+    color: lightgray;
+}
+
+/* CREATE ACCOUNT PAGE */
+#block-create-account {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    margin-bottom: 0%;
+    margin-top: 0%;
+}
+
+.create-account-form {
+    background-color: #9D4EDD;
+    margin-bottom: 3.25%;
+    border-radius: 25px;
+    padding-top: 1%;
+    padding-bottom: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 35%;
+    height: 100%;
+    font-family: "Request";
+    font-size: 14px;
+    color: #FFFFFF;
+}
+.form-fields {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+::placeholder {
+    color: #9D4EDD;
+    font-family: "Request";
+    position: relative;
+    top: 1px;
+}
+
+.create-account-form input {
+    border: 10px;
+    width: 450px;
+    height: 35px;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 0px;
+    border-radius: 20px;
+    background-color: #3C096C;
+}
+.create-account-form input[type="text"] {
+    color:#ffffff;
+    font-family: "Roboto-Medium";
+    font-size: 20px;
+}
+
+.create-account-form input[type="email"] {
+    color:#ffffff;
+    font-family: "Roboto-Medium";
+    font-size: 20px;
+}
+
+.create-account-form input[type="password"] {
+    color:#ffffff;
+    font-family: "Roboto-Medium";
+    font-size: 20px;
+}
+
+#create-account-submit {
+    color: #ffffff;
+    font-family: "Request";
+    width: 70%;
+    margin-top: 1.5%;
+}
+#create-account-submit:hover {
+    color: lightgray;
+    font-family: "Request";
+}
 
 
 
+.create-account-fields-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1.5%;
+    margin-bottom: 1.5%;
+}
 
+#sign-in-submit {
+    color: #ffffff;
+    font-family: "Request";
+    width: 60%;
+    margin-top: 1.5%;
+}
+#sign-in-submit:hover {
+    color: lightgray;
+    font-family: "Request";
+}
 
+#block-sign-in {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    margin-bottom: 1.5%;
+    margin-top: 0%;
+}
 
+.sign-in-fields-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3%;
+    margin-bottom: 5%;
+    font-size: 20px;
+}
 
+.sign-in-form {
+    background-color: #9D4EDD;
+    margin-bottom: 3.25%;
+    border-radius: 25px;
+    padding-top: 2%;
+    padding-bottom: 3%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 35%;
+    height: 100%;
+    font-family: "Request";
+    font-size: 14px;
+    color: #FFFFFF;
+}
+
+.sign-in-form input {
+    border: 10px;
+    width: 450px;
+    height: 40px;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 0px;
+    border-radius: 20px;
+    background-color: #3C096C;
+}
+
+.sign-in-form input[type="text"] {
+    color:#ffffff;
+    font-family: "Roboto-Medium";
+    font-size: 20px;
+}
+
+.sign-in-form input[type="password"] {
+    color:#ffffff;
+    font-family: "Roboto-Medium";
+    font-size: 20px;
+}

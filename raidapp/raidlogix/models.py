@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 
 class project(models.Model):
@@ -13,12 +13,6 @@ class tag(models.Model):
     description = models.TextField()
     project = models.ForeignKey(project, on_delete=models.CASCADE)
 
-class employee(models.Model):
-    f_name = models.CharField(max_length=50)
-    l_name = models.CharField(max_length=50)
-    email = models.CharField(max_length=50)
-    username = models.CharField(max_length=50)
-    password = models.CharField(max_length=50)
 
 class issue(models.Model):
     created = models.DateField()
@@ -103,12 +97,12 @@ class dependency(models.Model):
     budget = models.FloatField()
     project = models.ForeignKey(project, on_delete=models.CASCADE)
 
-class employee_projects(models.Model):
-    employee = models.ForeignKey(employee, on_delete=models.CASCADE)
+class user_projects(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     project = models.ForeignKey(project, on_delete=models.CASCADE)
 
-class employee_decisions(models.Model):
-    employee = models.ForeignKey(employee, on_delete=models.CASCADE)
+class user_decisions(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     decision = models.ForeignKey(decision, on_delete=models.CASCADE)
     description = models.TextField()
 

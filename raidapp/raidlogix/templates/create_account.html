@@ -1,0 +1,34 @@
+{% extends 'login-template.html' %}
+
+{% block content %}
+    <div id="block-create-account">
+        <h1 class="cool-text">Create Account</h1>
+
+        <div class="create-account-form">
+            <form action="" method="POST" class="form-fields">
+                {% csrf_token %}
+                <div class="create-account-fields-wrapper">
+                    {{form.username.label}}
+                    {{form.username}}
+                </div>
+                    <div class="create-account-fields-wrapper">
+                    {{form.email.label}}
+                    {{form.email}}
+                </div>
+                    <div class="create-account-fields-wrapper">
+                    {{form.password1.label}}
+                    {{form.password1}}
+                </div>
+                    <div class="create-account-fields-wrapper">
+                    {{form.password2.label}}
+                    {{form.password2}}
+                </div>
+                
+
+                <a href="#" id="create-account-submit"><input id="create-account-submit" type="submit" value="Create Account"/></a>
+            </form>
+            
+        </div>
+
+    </div>
+{% endblock content %}
