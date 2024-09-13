@@ -13,7 +13,6 @@ def template(request):
 @login_required
 def home(request):
     return render(request, "home.html")
-
 def login(request):
     return render(request, "landing.html")
 
@@ -31,7 +30,6 @@ def create_account(request):
 
 
 def sign_in(request):
-    
     form = SignInForm()
     if request.method == 'POST':
         form = SignInForm(request, data=request.POST)
@@ -52,6 +50,13 @@ def sign_in(request):
 
 
 def sign_out(request):
-    auth.logout()
+    auth.logout(request)
+    return redirect("login")
 
-    return redirect("home")
+@login_required
+def projects(request):
+
+    context = {
+        
+    }
+    return render(request, 'project_list.html', context)
