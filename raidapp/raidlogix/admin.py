@@ -17,3 +17,4 @@ admin.site.register(action_tags)
 admin.site.register(issue_tags)
 admin.site.register(decision_tags)
 admin.site.register(assumption_tags)
+

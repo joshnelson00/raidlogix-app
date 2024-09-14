@@ -1,0 +1,29 @@
+{% extends 'h_and_f.html' %}
+{% block content %}
+    <div id="block-create-project">
+        <div class="cool-text"><h1>Create Project</h1></div>
+        <div class="create-project-horizontal-wrapper">
+            <div class="create-project-input-wrapper">
+                {{ form.as_p }}
+
+            </div>
+            
+            <div class="create-project-button-wrapper">
+                <div class="create-project-button-small-wrapper">
+                    <a href="#"><div class="attribute-link-wrapper">Add Risk</div></a>
+                    <a href="#"><div class="attribute-link-wrapper">Add Action</div></a>
+                    <a href="#"><div class="attribute-link-wrapper">Add Assumption</div></a>
+                </div>
+                
+                <div class="create-project-button-small-wrapper">
+                    <a href="#"><div class="attribute-link-wrapper">Add Issue</div></a>
+                    <a href="#"><div class="attribute-link-wrapper">Add Decision</div></a>
+                    <a href="#"><div class="attribute-link-wrapper">Add Dependency</div></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    </div>
+{% endblock content %}

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import CreateAccountForm, SignInForm
+from .forms import CreateAccountForm, SignInForm, CreateProjectForm
 from django.http import HttpResponseRedirect
 
 from django.contrib.auth import login, logout, authenticate
@@ -60,3 +60,12 @@ def projects(request):
         
     }
     return render(request, 'project_list.html', context)
+
+def create_project(request):
+
+    form = CreateProjectForm()
+    context = {
+        'form': form
+    }
+    
+    return render(request, 'create_project.html',context)
