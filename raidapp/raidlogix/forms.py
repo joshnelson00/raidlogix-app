@@ -36,12 +36,6 @@ class CreateProjectForm(ModelForm):
     class Meta:
         model = project
         fields = ['name', 'due', 'budget', 'description']
-        placeholders = {
-            'name': 'Name',
-            'due': '01-01-2001',
-            'budget': 'Amount',
-            'description': 'Description',
-        }
         labels = {
             'name': '',
             'due': '',
@@ -51,7 +45,7 @@ class CreateProjectForm(ModelForm):
 
         widgets = {
             'name': forms.TextInput(attrs={'placeholder': 'Name'}),
-            'due': forms.DateInput(attrs={'placeholder': 'Date Due'}),
+            'due': forms.TextInput(attrs={'placeholder': 'Date Due'}),
             'budget': forms.TextInput(attrs={'placeholder': 'Budget'}),
             'description': forms.Textarea(attrs={'placeholder': 'Description'}),
         }

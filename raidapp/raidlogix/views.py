@@ -62,10 +62,14 @@ def projects(request):
     return render(request, 'project_list.html', context)
 
 def create_project(request):
-
     form = CreateProjectForm()
+    if request.method == 'POST':
+        form = CreateProjectForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("home")
+
     context = {
         'form': form
     }
-    
-    return render(request, 'create_project.html',context)
+    return render(request, 'create_project.html',context=context)

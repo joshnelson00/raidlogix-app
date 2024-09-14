@@ -6,7 +6,7 @@ from django.utils import timezone
 
 class project(models.Model):
     name = models.CharField(max_length=50)
-    due = models.DateField(blank=True, null=True)
+    due = models.CharField(max_length=50)
     description = models.TextField()
     budget = models.TextField()
 
@@ -19,7 +19,7 @@ class tag(models.Model):
 
 
 class issue(models.Model):
-    created = models.DateField(blank=True, null=True)
+    created = models.CharField(max_length=50)
     name = models.CharField(max_length=50)
     owner = models.CharField(max_length=50)
     description = models.TextField()
@@ -32,16 +32,16 @@ class issue(models.Model):
     impact = models.IntegerField()
     response_status = models.TextField()
     resolution = models.TextField()
-    date_resolved = models.DateField(blank=True, null=True)
+    date_resolved = models.CharField(max_length=50)
     root_cause = models.TextField()
     project = models.ForeignKey(project, on_delete=models.CASCADE)
 
 class action(models.Model):
-    created = models.DateField(blank=True, null=True)
+    created = models.CharField(max_length=50)
     name = models.CharField(max_length=50)
     owner = models.CharField(max_length=50)
     description = models.TextField()
-    due_date = models.DateField(blank=True, null=True)
+    due_date = models.CharField(max_length=50)
     #created/assigned/in work/in review/done/draft/on hold/delegated/blocked (waiting internal)/blocked (waiting external)
     state = models.CharField(max_length=50)
     action_source = models.CharField(max_length=50)
@@ -49,10 +49,10 @@ class action(models.Model):
     project = models.ForeignKey(project, on_delete=models.CASCADE)
 
 class decision(models.Model):
-    created = models.DateField(blank=True, null=True)
+    created = models.CharField(max_length=50)
     name = models.CharField(max_length=50)
     description = models.TextField()
-    due = models.DateField(blank=True, null=True)
+    due = models.CharField(max_length=50)
     #created/decided/in review/draft/deferred
     state = models.CharField(max_length=50)
     #created/decided/in review/draft/deferred
@@ -64,7 +64,7 @@ class decision(models.Model):
     project = models.ForeignKey(project, on_delete = models.CASCADE)
 
 class assumption(models.Model):
-    created = models.DateField(blank=True, null=True)
+    created = models.CharField(max_length=50)
     name = models.CharField(max_length=50)
     description = models.TextField()
     updated = models.TextField()
@@ -73,7 +73,7 @@ class assumption(models.Model):
     project = models.ForeignKey(project, on_delete = models.CASCADE)
 
 class risk(models.Model):
-    created = models.DateField(blank=True, null=True)
+    created = models.CharField(max_length=50)
     name = models.CharField(max_length=50)
     description = models.TextField()
     owner = models.CharField(max_length=50)
@@ -85,9 +85,9 @@ class risk(models.Model):
     impact = models.IntegerField()
     #score = (probability * impact) DOUBLE CHECK HERE
     score = models.IntegerField()
-    date_raised = models.DateField(blank=True, null=True)
-    trigger_date = models.DateField(blank=True, null=True)
-    date_closed = models.DateField(blank=True, null=True)
+    date_raised = models.CharField(max_length=50)
+    trigger_date = models.CharField(max_length=50)
+    date_closed = models.CharField(max_length=50)
     #avoice, mitigate, transfer, accept, escalate
     response_strategy = models.CharField(max_length=50)
     #red (behind), amber (in progress), green (on-track)
@@ -96,7 +96,7 @@ class risk(models.Model):
 
 class dependency(models.Model):
     name = models.CharField(max_length=50)
-    due = models.DateField(blank=True, null=True)
+    due = models.CharField(max_length=50)
     description = models.TextField()
     budget = models.FloatField()
     project = models.ForeignKey(project, on_delete=models.CASCADE)
