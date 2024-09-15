@@ -6,27 +6,13 @@
             <div class="create-project-horizontal-wrapper">
                 <div class="create-project-input-wrapper">
                     <h1 class="create-project-header">Project Info</h1>
-                        <form method="post">
+                        <form class="create-project-form" method="post">
                             {% csrf_token %}
                             {{ form.as_p }}
-                            <a href="#" id="create-project-submit-a"><input id="ID_HERE" type="submit" value="Submit"/></a>
+                            <a href="#" id="create-project-submit-a"><input id="create-project-button" type="submit" value="Submit"/></a>
                         </form>
-                </div>
-                <div class="create-project-vertical-button-wrapper">
-                    <h1 class="create-project-header">Project Attributes</h1>
-                    <div class="create-project-button-wrapper">
-                        <div class="create-project-button-small-wrapper">
-                            <a href="#"><div class="attribute-link-wrapper">Add Risk</div></a>
-                            <a href="#"><div class="attribute-link-wrapper">Add Action</div></a>
-                            <a href="#"><div class="attribute-link-wrapper">Add Assumption</div></a>
-                        </div>
-                        <div class="create-project-button-small-wrapper">
-                            <a href="#"><div class="attribute-link-wrapper">Add Issue</div></a>
-                            <a href="#"><div class="attribute-link-wrapper">Add Decision</div></a>
-                            <a href="#"><div class="attribute-link-wrapper">Add Dependency</div></a>
-                        </div>
                     </div>
-                </div>
+
                 
             </div>
         </div>

@@ -44,8 +44,8 @@ class CreateProjectForm(ModelForm):
         }
 
         widgets = {
-            'name': forms.TextInput(attrs={'placeholder': 'Name'}),
-            'due': forms.TextInput(attrs={'placeholder': 'Date Due'}),
+            'name': forms.TextInput(attrs={'placeholder': 'Project Name'}),
+            'due': forms.TextInput(attrs={'placeholder': 'Due Date'}),
             'budget': forms.TextInput(attrs={'placeholder': 'Budget'}),
             'description': forms.Textarea(attrs={'placeholder': 'Description'}),
         }

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import CreateAccountForm, SignInForm, CreateProjectForm
 from django.http import HttpResponseRedirect
 
@@ -6,6 +6,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from .models import *
 # Create your views here.
 def template(request):
     return render(request, "h_and_f.html")
@@ -55,21 +56,38 @@ def sign_out(request):
 
 @login_required
 def projects(request):
+    current_user = request.user
+    user_projects_list = user_projects.objects.filter(user=current_user)
+    projects = project.objects.filter(id__in=user_projects_list.values_list('project_id', flat=True))
 
     context = {
-        
+        'projects': projects,
     }
     return render(request, 'project_list.html', context)
 
 def create_project(request):
     form = CreateProjectForm()
+    current_user = request.user
     if request.method == 'POST':
         form = CreateProjectForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect("home")
+            new_project = form.save()
+            
+            # Create a new user_projects entry
+            new_user_project = user_projects(user=current_user, project=new_project)
+            new_user_project.save()
+            
+            return redirect("projects")
+        
+
 
     context = {
         'form': form
     }
     return render(request, 'create_project.html',context=context)
+
+def view_project(request, pk):
+    project = get_object_or_404(request, pk=pk)
+
+
+
