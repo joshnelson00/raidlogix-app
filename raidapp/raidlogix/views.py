@@ -8,12 +8,10 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import *
 # Create your views here.
-def template(request):
-    return render(request, "h_and_f.html")
-
 @login_required
 def home(request):
     return render(request, "home.html")
+
 def login(request):
     return render(request, "landing.html")
 
@@ -43,13 +41,13 @@ def sign_in(request):
             if user is not None:
 
                 auth.login(request, user)
-                return redirect("home")
+                return redirect("projects")
     context = {
         'form':form
     }
     return render(request, 'sign_in.html', context=context)
 
-
+@login_required
 def sign_out(request):
     auth.logout(request)
     return redirect("login")
@@ -60,11 +58,14 @@ def projects(request):
     user_projects_list = user_projects.objects.filter(user=current_user)
     projects = project.objects.filter(id__in=user_projects_list.values_list('project_id', flat=True))
 
+
     context = {
         'projects': projects,
+        'user': current_user,
     }
-    return render(request, 'project_list.html', context)
 
+    return render(request, 'project_list.html', context)
+@login_required
 def create_project(request):
     form = CreateProjectForm()
     current_user = request.user
@@ -85,9 +86,18 @@ def create_project(request):
         'form': form
     }
     return render(request, 'create_project.html',context=context)
-
+@login_required
 def view_project(request, pk):
-    project = get_object_or_404(request, pk=pk)
+    
+    # This will raise a 404 error if no Project is found with the given pk
+    this_project = get_object_or_404(project, pk=pk)
+    
+
+
+    context = {
+        'project': this_project
+    }
+    return render(request, "view_project.html", context=context)
 
 
 

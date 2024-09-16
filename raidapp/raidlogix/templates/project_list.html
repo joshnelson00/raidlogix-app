@@ -4,8 +4,6 @@
 
     <div id="block-project-list">
 
-        
-
         <div id="project-header-wrapper">
             <div class="cool-text" id="project-header"><h1>Projects</h1></div>
             <div class="project-submenu">
@@ -15,23 +13,26 @@
         <div class="project-outer-wrapper">
             <div class="project-inner-wrapper">
 
-                <a id="project-container-link" href="#">
-                <div class="project-container">
-                    
-                    <div class="left-project-container">
-                        <div class="project-value">Name: </div>
-                        <div class="project-value">Last Updated: </div>
-                        <div class="project-value">Owner: </div>
-                    </div>
-                    <div class="right-project-container">
+                {% if projects.count == 0 %}
+                    <h1 id="empty-projects">NO PROJECTS</h1>
 
-                        <div class="project-value">Project ID: </div>
-                        <div class="project-value">Target Date: </div>
-                        <div class="project-value">Budget: </div>
+                {% else %}
+                    {% for project in projects %}
+
+                    <a id="project-container-link" href="{% url 'view_project' project.pk %}">
+                    <div class="project-container">
+                        <div class="left-project-container">
+                            <div class="project-value">Name: <p class="project-list-value">&nbsp;{{ project.name }}</p></div>
+                            <div class="project-value">Owner: <p class="project-list-value">&nbsp;{{ user.username }}</p></div>
+                        </div>
+                        <div class="right-project-container">
+                            <div class="project-value">Target Date: <p class="project-list-value">&nbsp;{{ project.due }}</p></div>
+                            <div class="project-value">Budget: <p class="project-list-value">&nbsp;{{ project.budget }}</p></div>
+                        </div>
                     </div>
-                
-                </div>
-                </a>
+                    </a>
+                    {% endfor %}
+                {% endif %}
 
 
             </div>
