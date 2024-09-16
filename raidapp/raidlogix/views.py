@@ -86,16 +86,22 @@ def create_project(request):
         'form': form
     }
     return render(request, 'create_project.html',context=context)
+
+
 @login_required
 def view_project(request, pk):
     
-    # This will raise a 404 error if no Project is found with the given pk
     this_project = get_object_or_404(project, pk=pk)
-    
+    form = CreateProjectForm(instance=this_project)
 
-
+    if request.method == 'POST':
+        form = CreateProjectForm(request.POST, instance=this_project)
+        if form.is_valid():
+            form.save()
+            return redirect('view_project', pk)
     context = {
-        'project': this_project
+        'project': this_project,
+        'form': form,
     }
     return render(request, "view_project.html", context=context)
 

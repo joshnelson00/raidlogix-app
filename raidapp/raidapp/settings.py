@@ -108,6 +108,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    BASE_DIR / 'raidlogix' / 'static',  # BASE_DIR points to your project root
+]
 LOGIN_URL = "landing-page"
 LOGIN_REDIRECT_URL = "landing-page"
 

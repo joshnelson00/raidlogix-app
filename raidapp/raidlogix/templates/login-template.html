@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <link rel="stylesheet" href="static/main.css">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'main.css' %}">
         <title>Test</title>
         <link rel="shortcut icon" href="#">
-        {% load static %}
+        
     </head>
     <body>
         <div id="login-logo"><a href="{% url 'landing-page' %}">RAIDLOGIX</a></div>

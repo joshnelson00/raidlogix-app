@@ -3,15 +3,86 @@
 
 {% block content %}
 
-    <style>
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+    
 
-
-    </style>
     <div id="block-edit-project">
+        <div id="edit-project-header"><h1>{{ project.name }}</h1></div>
 
-        <link rel="stylesheet" href="{% static 'main.css' %}">
+            <div id="edit-project-horizontal-wrapper">
+                <div id="edit-project-vertical-wrapper">
+                    <div class="edit-project-card">
+                        <div class="edit-project-card-text">Risks</div>
+                        <a class="edit-wrapper-link" href="#"><div>Create</div></a>
+                        <a class="edit-wrapper-link" href="#"><div>Edit</div></a>
+                    </div>
+                </div>
+                <div id="edit-project-vertical-wrapper">
+                    <div class="edit-project-card">
+                        <div class="edit-project-card-text">Actions</div>
+                        <a class="edit-wrapper-link" href="#"><div>Create</div></a>
+                        <a class="edit-wrapper-link" href="#"><div>Edit</div></a>
+                    </div>
+                </div>
+                <div id="edit-project-vertical-wrapper">
+                    <div class="edit-project-card">
+                        <div class="edit-project-card-text">Assumptions</div>
+                        <a class="edit-wrapper-link" href="#"><div>Create</div></a>
+                        <a class="edit-wrapper-link" href="#"><div>Edit</div></a>
+                    </div>
+                </div>
+            </div>
+        
+            <div id="edit-project-horizontal-wrapper">
+                <div id="edit-project-vertical-wrapper">
+                    <div class="edit-project-card">
+                        <div class="edit-project-card-text">Issues</div>
+                        <a class="edit-wrapper-link" href="#"><div>Create</div></a>
+                        <a class="edit-wrapper-link" href="#"><div>Edit</div></a>
+                    </div>
+                </div>
+                <div id="edit-project-vertical-wrapper">
+                    <div class="edit-project-card">
+                        <div class="edit-project-card-text">Decisions</div>
+                        <a class="edit-wrapper-link" href="#"><div>Create</div></a>
+                        <a class="edit-wrapper-link" href="#"><div>Edit</div></a>
+                    </div>
+                </div>
+                <div id="edit-project-vertical-wrapper">
+                    <div class="edit-project-card">
+                        <div class="edit-project-card-text">Dependencies</div>
+                        <a class="edit-wrapper-link" href="#"><div>Create</div></a>
+                        <a class="edit-wrapper-link" href="#"><div>Edit</div></a>
+                    </div>
+                </div>
+            </div>
+            <!--END OF CARDS-->
+            <div class="edit-form-input-wrapper">
+                <form action="" method="post" class="edit-project-form">
+                    {% csrf_token %}
+                    <div class="edit-project-form-vertical-wrapper">
+                        <h1 class="edit-project-details-header">Edit Project Details</h1>
+                        <div class="edit-project-form-horizontal-wrapper">
+                    
+                            <div id="form-left-wrapper">
+                                {{ form.name }}
+                                {{ form.due }}
+                                {{ form.budget }}
+                            </div>
+                            <div id="form-right-wrapper">
+                                {{ form.description }}
+                            </div>
+                        </div>
+                        <a href="#"><input id="edit-project-button" type="submit" value="Update"/></a>
+                    </div>
+                 </form>
+            </div>
+
+
+
         
     </div>
+        
 
 
 {% endblock content %}
