@@ -1,0 +1,45 @@
+{% extends 'h_and_f.html' %}
+
+{% block content %}
+
+<div id="block-add-risk">
+    <form action="" method="post" class="add-attribute-form">
+        {% csrf_token %}
+        {{ form.created }}
+        {{ form.name }}
+        {{ form.state }}
+        <div class="add-risk-form-special-container">
+        <div>
+            {{ form.description }}
+        </div>
+        <div class="add-risk-form-right-container">
+            <div class="add-risk-right-child">
+                {{ form.probability }}
+            </div>
+            <div class="add-risk-right-child">
+                {{ form.impact }}
+            </div>
+            
+            
+            <div class="add-risk-score">
+                {{ form.score }}
+            </div>
+            
+        </div>
+        
+        </div>
+        {{ form.date_raised }}
+        {{ form.trigger_date }}
+        {{ form.date_closed }}
+        {{ form.response_strategy }}
+        {{ form.response_plan_state }}
+        <a href="#" id="sign-in-submit"><input id="sign-in-submit" type="submit" value="Sign In"/></a>
+    </form>
+
+
+</div>
+
+
+
+
+{% endblock content %}

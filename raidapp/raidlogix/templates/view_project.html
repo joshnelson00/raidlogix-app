@@ -13,7 +13,7 @@
                 <div id="edit-project-vertical-wrapper">
                     <div class="edit-project-card">
                         <div class="edit-project-card-text">Risks</div>
-                        <a class="edit-wrapper-link" href="#"><div>Create</div></a>
+                        <a class="edit-wrapper-link" href="{% url 'add_risk' project.pk %}"><div>Create</div></a>
                         <a class="edit-wrapper-link" href="#"><div>Edit</div></a>
                     </div>
                 </div>
@@ -77,6 +77,24 @@
                     </div>
                  </form>
             </div>
+
+            <div id="project-attribute-container">
+                <a id="project-container-link" href="#"></a>
+                    <div class="project-container">
+                        <div class="left-project-container">
+                            <div class="project-value">Name: <p class="project-list-value">&nbsp;{{ project.name }}</p></div>
+                            <div class="project-value">Owner: <p class="project-list-value">&nbsp;{{ user.username }}</p></div>
+                        </div>
+                        <div class="right-project-container">
+                            <div class="project-value">Target Date: <p class="project-list-value">&nbsp;{{ project.due }}</p></div>
+                            <div class="project-value">Budget: <p class="project-list-value">&nbsp;{{ project.budget }}</p></div>
+                        </div>
+                    </div>
+                    </a>
+
+
+            </div>
+
 
 
 

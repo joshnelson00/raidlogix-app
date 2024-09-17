@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import CreateAccountForm, SignInForm, CreateProjectForm
+from .forms import CreateAccountForm, SignInForm, CreateProjectForm, AddRiskForm
 from django.http import HttpResponseRedirect
 
 from django.contrib.auth import login, logout, authenticate
@@ -94,6 +94,8 @@ def view_project(request, pk):
     this_project = get_object_or_404(project, pk=pk)
     form = CreateProjectForm(instance=this_project)
 
+
+
     if request.method == 'POST':
         form = CreateProjectForm(request.POST, instance=this_project)
         if form.is_valid():
@@ -103,7 +105,19 @@ def view_project(request, pk):
         'project': this_project,
         'form': form,
     }
+
     return render(request, "view_project.html", context=context)
+
+@login_required
+def add_risk(request, pk):
+    this_project = get_object_or_404(project, pk=pk)
+    form = AddRiskForm(request.POST, instance=this_project)
+        
+    context = {
+        'form':form
+    }
+   
+    return render(request, 'add_risk.html', context=context)
 
 
 

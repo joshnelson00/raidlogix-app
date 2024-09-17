@@ -943,3 +943,113 @@ body {
     font-size: 20px;
     color: #FFFFFF;
 }
+
+
+#project-attribute-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    background-color: #ffffff;
+    margin-top: 6%;
+}
+
+
+#block-add-risk {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    background-color: #8642bd;
+    margin-top: 7%;
+}
+
+.add-attribute-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+.add-attribute-form > input{
+    margin-top:1%;
+    margin-bottom:1%;
+    width: 20%;
+    background-color: #3C096C;
+    border-width: 0px;
+    color: #FFFFFF;
+}
+
+.add-attribute-form > input::placeholder{
+    color: #FFFFFF;
+}
+
+
+.add-risk-form-special-container {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1%;
+    margin-top: 1%;
+}
+
+.add-risk-form-right-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.add-risk-form-special-container input{
+    margin-top: 1%;
+    margin-bottom: 1%;
+    background-color: #3C096C;
+    border-width: 0px;
+    color: #fff;
+}
+
+.add-risk-form-special-container input::placeholder{
+    color: #fff;
+    
+}
+
+.add-risk-score input[disabled] {
+    opacity: 1;
+    background-color: #3C096C;
+    border-width: 0px;
+    color: #FFFFFF;
+}
+
+.add-risk-score input[disabled]::placeholder {
+    color: #fff;
+}
+
+.add-risk-right-child input{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    resize: none;
+    
+}
+
+.add-attribute-form textarea{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    resize: none;
+    background-color: #3C096C;
+    border-width: 0px;
+    color: #fff;
+    
+}
+
+.add-attribute-form textarea::placeholder{
+    color: #fff;
+    font-family: "Request";
+    
+}
+
+
+

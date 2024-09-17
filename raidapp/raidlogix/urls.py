@@ -11,6 +11,7 @@ urlpatterns = [
     path('sign-out', views.sign_out, name="sign_out"),
     path('create-project', views.create_project, name="create_project"),
     path('projects/<int:pk>/', views.view_project, name="view_project"),
+    path('projects/<int:pk>/add-risk', views.add_risk, name="add_risk"),
     
 
 ]
