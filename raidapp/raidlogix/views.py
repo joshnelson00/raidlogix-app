@@ -91,6 +91,7 @@ def view_project(request, pk):
     
     this_project = get_object_or_404(project, pk=pk)
     form = CreateProjectForm(instance=this_project)
+    risks = risk.objects.filter(project=this_project)
 
     if request.method == 'POST':
         form = CreateProjectForm(request.POST, instance=this_project)
@@ -100,8 +101,8 @@ def view_project(request, pk):
     context = {
         'project': this_project,
         'form': form,
+        'risks': risks,
     }
-
     return render(request, "view_project.html", context=context)
 
 @login_required
@@ -119,9 +120,30 @@ def add_risk(request, pk):
             return redirect('view_project', pk)
         else:
             print(form.errors)
-        
-    
-        
+
+    context = {
+        'form':form
+    }
+   
+    return render(request, 'add_risk.html', context=context)
+
+@login_required
+def view_risk(request, project_pk, risk_pk):
+    this_project = get_object_or_404(project, pk=project_pk)
+    this_risk = get_object_or_404(risk, pk=risk_pk, project=this_project)
+    form = AddRiskForm(instance=this_risk)
+    current_user = request.user
+    if request.method == 'POST':
+        form = AddRiskForm(request.POST)
+        if form.is_valid():
+            new_risk = form.save(commit=False)
+            new_risk.project = this_project
+            new_risk.owner = current_user
+            new_risk.save()
+            return redirect('view_project', project_pk)
+        else:
+            print(form.errors)
+            
     context = {
         'form':form
     }

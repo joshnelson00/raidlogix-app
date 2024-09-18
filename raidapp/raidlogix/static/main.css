@@ -1118,7 +1118,6 @@ body {
     width: 50%;
     margin-top: 4%;
     background-color: #3C096C; /* This should now apply */
-    border-width: 0px;
     padding: 2%;
     border-radius: 22px;
     border-color: #9D4EDD;
@@ -1133,8 +1132,10 @@ body {
     background-color: #4f1585;
 }
 
-
 #add-attribute-header {
     font-family: "Request";
     color: #fff;
 }
+
+
+
