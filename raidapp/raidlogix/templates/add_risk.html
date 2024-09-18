@@ -3,6 +3,11 @@
 {% block content %}
 
 <div id="block-add-risk">
+
+    <h1 id="add-attribute-header">Add Risk</h1>
+
+
+
     <form action="" method="post" class="add-attribute-form">
         {% csrf_token %}
         {{ form.created }}
@@ -19,12 +24,9 @@
             <div class="add-risk-right-child">
                 {{ form.impact }}
             </div>
-            
-            
             <div class="add-risk-score">
                 {{ form.score }}
             </div>
-            
         </div>
         
         </div>
@@ -33,7 +35,9 @@
         {{ form.date_closed }}
         {{ form.response_strategy }}
         {{ form.response_plan_state }}
-        <a href="#" id="sign-in-submit"><input id="sign-in-submit" type="submit" value="Sign In"/></a>
+        <a href="#" id="add-attribute-submit-a"><input id="add-attribute-submit" type="submit" value="Add Risk"/></a>
+        
+
     </form>
 
 

@@ -70,20 +70,22 @@ class AddRiskForm(ModelForm):
             'response_strategy': '', 
             'response_plan_state': '',
         }
+
         widgets = {
             'created': forms.TextInput(attrs={'placeholder': 'Date Created'}),
             'name': forms.TextInput(attrs={'placeholder': 'Name'}),
             'description': forms.Textarea(attrs={'placeholder': 'Description'}),
             'state': forms.TextInput(attrs={'placeholder': 'State'}),
-            'probability': forms.NumberInput(attrs={'placeholder': 'Probability %'}),
+            'probability': forms.NumberInput(attrs={'placeholder': 'Probability'}),
             'impact': forms.NumberInput(attrs={'placeholder': 'Impact'}),
-            'score': forms.NumberInput(attrs={'placeholder': 'Score', 'disabled': 'True'}),
-            'date_raised': forms.DateInput(attrs={'placeholder': 'Date Raised'}),
+            'score': forms.NumberInput(attrs={'placeholder': 'Score'}),
+            'date_raised': forms.TextInput(attrs={'placeholder': 'Date Raised'}),
             'trigger_date': forms.TextInput(attrs={'placeholder': 'Trigger Date'}),
             'date_closed': forms.TextInput(attrs={'placeholder': 'Date Closed'}),
             'response_strategy': forms.TextInput(attrs={'placeholder': 'Repsonse Strategy'}),
             'response_plan_state': forms.TextInput(attrs={'placeholder': 'Response Plan State'}),
         }
+        
 
 
 

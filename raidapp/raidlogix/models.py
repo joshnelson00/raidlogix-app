@@ -84,7 +84,7 @@ class risk(models.Model):
     #integer between 1-100
     impact = models.IntegerField()
     #score = (probability * impact) DOUBLE CHECK HERE
-    score = models.IntegerField()
+    score = models.DecimalField(decimal_places=2, max_digits=5)
     date_raised = models.CharField(max_length=50)
     trigger_date = models.CharField(max_length=50)
     date_closed = models.CharField(max_length=50)

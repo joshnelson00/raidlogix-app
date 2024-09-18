@@ -580,12 +580,19 @@ body {
     text-align: center;
     border-radius: 20px;
     width: 100%;
-    
 }
+
+
 
 .submenu-item a{
     text-decoration: none;
     color: #FFFFFF;
+}
+
+.submenu-item:hover{
+    text-decoration: none;
+    background-color: #45007A;
+    cursor: pointer;
 }
 
 
@@ -700,7 +707,6 @@ body {
 
 .create-project-form {
     display: inline-block;
-
     text-align: center;
 }
 
@@ -933,9 +939,11 @@ body {
     border-style: solid;
     bottom: 70px;
 }
+
 #edit-project-button:hover {
     cursor:pointer;
-    color: lightgray;
+    background-color: #4f1585;
+
 }
 
 .edit-project-details-header {
@@ -961,8 +969,8 @@ body {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    background-color: #8642bd;
     margin-top: 7%;
+    padding-bottom:1%;
 }
 
 .add-attribute-form {
@@ -971,25 +979,41 @@ body {
     align-items: center;
     text-align: center;
     width: 100%;
+    vertical-align: middle;
 }
 
 .add-attribute-form > input{
-    margin-top:1%;
-    margin-bottom:1%;
-    width: 20%;
-    background-color: #3C096C;
+    margin-top:0.75%;
+    margin-bottom:0.75%;
+    width: 30%;
+    background-color: #9D4EDD;
+    padding-bottom: 0.75%;
+    padding-top: 0.75%;
+    padding-left: 0.5%;
+    padding-right: 0.5%;
+    line-height:1.5;
     border-width: 0px;
     color: #FFFFFF;
+    border-radius: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
 }
 
 .add-attribute-form > input::placeholder{
     color: #FFFFFF;
+    font-family: "Request";
+    font-size: 10px;
+    
 }
 
 
 .add-risk-form-special-container {
     display: flex;
     flex-direction: row;
+    text-align: center;
     margin-bottom: 1%;
     margin-top: 1%;
 }
@@ -999,31 +1023,59 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    height: 170px;
 
 }
 
+
 .add-risk-form-special-container input{
-    margin-top: 1%;
-    margin-bottom: 1%;
-    background-color: #3C096C;
+    margin-top: 0.75%;
+    margin-bottom: 0.75%;
+    background-color: #9D4EDD;
     border-width: 0px;
     color: #fff;
+    background-color: #9D4EDD;
+    border-width: 0px;
+    color: #FFFFFF;
+    width:148%;
+    border-radius: 10px;
+    padding-bottom: 5%;
+    padding-top: 5%;
+    padding-left: 10%;
+    padding-right: 0.5%;
+    position: relative;
+    right:5px;
+    font-family: "Roboto-Medium";
+    font-size: 10px;
 }
 
 .add-risk-form-special-container input::placeholder{
     color: #fff;
+    font-family: "Request";
+    font-size: 8px;
     
 }
 
 .add-risk-score input[disabled] {
     opacity: 1;
-    background-color: #3C096C;
+    background-color: #9D4EDD;
     border-width: 0px;
     color: #FFFFFF;
+    width:148%;
+    border-radius: 10px;
+    padding-bottom: 5%;
+    padding-top: 5%;
+    padding-left: 10%;
+    padding-right: 0.5%;
+    position: relative;
+    right:5px;
+    
 }
 
 .add-risk-score input[disabled]::placeholder {
     color: #fff;
+    font-family: "Request";
+    font-size: 8px;
 }
 
 .add-risk-right-child input{
@@ -1039,17 +1091,50 @@ body {
     flex-direction: column;
     align-items: center;
     resize: none;
-    background-color: #3C096C;
+    background-color: #9D4EDD;
     border-width: 0px;
     color: #fff;
-    
+    padding: 3%;
+    border-radius: 10px;
+    width: 100%;
+    position: relative;
+    right:56px;
+    font-family: "Roboto-Medium";
+    height: 152px;
 }
 
 .add-attribute-form textarea::placeholder{
     color: #fff;
     font-family: "Request";
-    
+    font-size: 10px;
+}
+
+#add-attribute-submit-a {
+    width: 20%;
+}
+
+#add-attribute-submit {
+    font-family: "Request";
+    width: 50%;
+    margin-top: 4%;
+    background-color: #3C096C; /* This should now apply */
+    border-width: 0px;
+    padding: 2%;
+    border-radius: 22px;
+    border-color: #9D4EDD;
+    border-width: 3px;
+    border-style: solid;
+    color: #fff;
+}
+
+#add-attribute-submit:hover {
+    font-family: "Request";
+    cursor: pointer;
+    background-color: #4f1585;
 }
 
 
-
+#add-attribute-header {
+    font-family: "Request";
+    color: #fff;
+}
