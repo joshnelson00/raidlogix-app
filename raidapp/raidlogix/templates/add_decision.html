@@ -1,0 +1,44 @@
+{% extends 'h_and_f.html' %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'main.css' %}">
+    <div id="block-add-risk">
+
+        <h1 id="add-attribute-head">Add Decision</h1>
+
+        <form action="" method="post" class="add-attribute-form">
+            {% csrf_token %}
+
+            {{ form.created }}
+            {{ form.name }}
+            <div id="add-assumption-textarea">
+                {{ form.description }}
+            </div>
+            
+
+            {{ form.due }}
+            {{ form.state }}
+            {{ form.decision_made }}
+            <div id="add-assumption-textarea">
+                {{ form.justification }}
+            </div>
+            
+            <div id="add-assumption-textarea">
+                {{ form.impact }}
+            </div>
+            
+
+
+            {{ form.importance }}
+            
+            <a href="#" id="add-attribute-submit-a"><input id="add-attribute-submit" type="submit" value="Add Decision"/></a>
+        </form>
+    
+    
+    </div>
+
+
+
+
+{% endblock content %}

@@ -1,0 +1,28 @@
+{% extends 'h_and_f.html' %}
+
+{% block content %}
+
+<div id="block-add-risk">
+
+    <h1 id="add-attribute-head">Add Dependency</h1>
+    <form action="" method="post" class="add-attribute-form">
+        {% csrf_token %}
+
+        {{form.name }}
+        {{form.due }}
+        <div id="add-assumption-textarea">
+            {{form.description }}   
+        </div>
+        {{form.budget }}
+        
+
+        <a href="#" id="add-attribute-submit-a"><input id="add-attribute-submit-assumption" type="submit" value="Add Dependency"/></a>
+    </form>
+
+
+</div>
+
+
+
+
+{% endblock content %}

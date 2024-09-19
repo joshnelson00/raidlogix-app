@@ -749,7 +749,7 @@ body {
     align-items: center;
     width: 70%;
     margin-top: 7%;
-    margin-bottom: 5%;
+    margin-bottom: 17%;
 }
 
 #edit-project-horizontal-wrapper {
@@ -811,26 +811,11 @@ body {
     text-align: center;
     margin-top: 3%;
     margin-bottom: 3%;
+    transition: transform 0.125s, background-color 0.125s;
 }
 .edit-wrapper-link:hover {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     background-color: #4f1585;
-    border-color: #9D4EDD;
-    border-width: 4px;
-    border-style: solid;
-    border-radius: 20px;
-    padding-top: 2%;
-    padding-bottom: 2%;
-    padding-left: 4%;
-    padding-right: 4%;
-    text-decoration: none;
-    color: #FFFFFF;
-    width: 60%;
-    text-align: center;
-    margin-top: 3%;
-    margin-bottom: 3%;
+    transform: scale(1.1);
 }
 
 .edit-project-card-text {
@@ -880,7 +865,7 @@ body {
     width: 100%;
     height: 30vh;
     justify-content: center;
-    margin-bottom: 5%;
+    margin-bottom: 3%;
 }
 .edit-form-input-wrapper form {
     display: flex;
@@ -916,6 +901,7 @@ body {
     display: flex;
     flex-direction: row;
     width: 100%;
+    margin-bottom: 0%;
 }
 
 .edit-project-form input[type="text"]::placeholder {
@@ -944,12 +930,15 @@ body {
     border-color: #9D4EDD;
     border-width: 3px;
     border-style: solid;
-    bottom: 70px;
+    bottom: 10px;
+    margin-bottom: 7%;
+    transition: transform .125, background-color, .125s;
 }
 
 #edit-project-button:hover {
     cursor:pointer;
     background-color: #4f1585;
+    transform: scale(1.1);
 
 }
 
@@ -1049,7 +1038,6 @@ body {
     border-width: 0px;
     color: #fff;
     background-color: #9D4EDD;
-    border-width: 0px;
     color: #FFFFFF;
     width:148%;
     border-radius: 10px;
@@ -1129,8 +1117,7 @@ body {
 
 #add-attribute-submit {
     font-family: "Request";
-    width: 50%;
-    margin-top: 4%;
+    width: 60%;
     background-color: #3C096C; /* This should now apply */
     padding: 2%;
     border-radius: 22px;
@@ -1138,12 +1125,16 @@ body {
     border-width: 3px;
     border-style: solid;
     color: #fff;
+    text-align: center;
+    transition: transform .125s, background-color .125s;
 }
 
 #add-attribute-submit:hover {
     font-family: "Request";
     cursor: pointer;
     background-color: #4f1585;
+    transform: scale(1.1);
+    
 }
 
 #add-attribute-header {
@@ -1184,7 +1175,8 @@ body {
 #back-to-projects {
     width: 50%;
     text-align: center;
-    margin: 0%;
+    position: relative;
+    margin-bottom: 7%;
 }
 
 .add-action-form-textarea {
@@ -1234,8 +1226,64 @@ body {
     border-width: 3px;
     border-style: solid;
     color: #fff;
+    transition: transform .125s, background-color .125s;
 }
 
 #add-attribute-submit-assumption:hover {
+    cursor: pointer;
+    background-color: #4f1585;
+    transform: scale(1.1);
+}
+
+.delete-item {
+    background-color: transparent;
+    border-color: red;
+    border-width: 4px;
+    border-radius: 20px;
+    border-style: solid;
+    margin-top: 10%;
+    color: red;
+    padding: 1%;
+    font-family: "Request";
+    font-size: 8px;
+    transition: transform .125s, background-color, .125s;
+}
+
+.delete-item:hover {
+    background-color: red;
+    color: white;
+    transform: scale(1.3);
+    cursor: pointer;
+}
+
+#project-buttons {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    bottom:40%;
+}
+
+.delete-attribute {
+    background-color: transparent;
+    border-color: red;
+    border-width: 4px;
+    border-radius: 30px;
+    border-style: solid;
+    margin-top: 7%;
+    color: red;
+    padding: 0.75%;
+    padding-left: 2%;
+    padding-right: 2%;
+    font-family: "Request";
+    font-size: 8px;
+    transition: transform 0.2s, background-color 0.2s, color 0.2s;
+}
+.delete-attribute:hover {
+    background-color: red;
+    color: white;
+    transition: 0.2s;
+    transform: scale(1.5);
     cursor: pointer;
 }

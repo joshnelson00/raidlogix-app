@@ -12,16 +12,22 @@
 
         {{ form.created }}
         {{ form.name }}
-        <div class="add-action-form-textarea">
+        <div id="add-assumption-textarea">
             {{ form.description }}
         </div>
-        {{ form.due_date }}
+        {{ form.due }}
         {{ form.state }}
-        {{ form.action_source }}
+        {{ form.decision_made }}
+        <div id="add-assumption-textarea">
+            {{ form.justification }}
+        </div>
+        <div id="add-assumption-textarea">
+            {{ form.impact }}
+        </div>
         {{ form.importance }}
         <a href="#" id="add-attribute-submit-a"><input id="add-attribute-submit" type="submit" value="Update"/></a>
-        <button type="submit" class="delete-attribute" name="delete_action" onclick="return confirm('Are you sure you want to delete this action?');">
-            Delete Action
+        <button type="submit" class="delete-attribute" name="delete_decision" onclick="return confirm('Are you sure you want to delete this decision?');">
+            Delete Decision
         </button>
     </form>
 

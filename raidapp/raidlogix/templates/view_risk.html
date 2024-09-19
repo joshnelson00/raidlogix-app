@@ -37,7 +37,9 @@
         {{ form.response_strategy }}
         {{ form.response_plan_state }}
         <a href="#" id="add-attribute-submit-a"><input id="add-attribute-submit" type="submit" value="Update"/></a>
-        
+        <button type="submit" class="delete-attribute" name="delete_risk" onclick="return confirm('Are you sure you want to delete this risk?');">
+            Delete Risk
+        </button>
 
     </form>
 

@@ -1,0 +1,39 @@
+{% extends 'h_and_f.html' %}
+
+{% block content %}
+
+<div id="block-attribute-list">
+
+    <div class="attribute-text"><p>Decisions</p></div>
+    <div id="project-attribute-container">
+        {% if decisions.count == 0 %}
+            <h1 id="empty-projects">NO DECISIONS</h1>
+
+        {% else %}
+            {% for decision in decisions %}
+                <a id="project-container-link" href="{% url 'view_decision' project.pk decision.pk %}">
+                    <div class="project-container">
+
+                        <div class="left-project-container">
+                            <div class="project-value">Name: <p class="project-list-value">&nbsp;{{ decision.name }}</p></div>
+                            <div class="project-value">State: <p class="project-list-value">&nbsp;{{ decision.state }}</p></div>
+                        </div>
+                        <div class="right-project-container">
+                            <div class="project-value">Importance: <p class="project-list-value">&nbsp;{{ decision.importance }}</p></div>
+                            <div class="project-value">Due Date: <p class="project-list-value">&nbsp;{{ decision.due }}</p></div>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <a href="{% url 'view_project' project.pk %}" id="reroute-project"><input id="add-attribute-submit" type="submit" value="Back to Project"/></a>
+    
+
+</div>
+
+
+
+
+{% endblock content %}

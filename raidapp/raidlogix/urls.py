@@ -20,6 +20,17 @@ urlpatterns = [
     path('projects/<int:pk>/add-assumption', views.add_assumption, name="add_assumption"),
     path('projects/<int:project_pk>/assumptions', views.assumptions, name="assumptions"),
     path('projects/<int:project_pk>/assumptions/<int:assumption_pk>', views.view_assumption, name="view_assumption"),
+    path('projects/<int:pk>/add-issue', views.add_issue, name="add_issue"),
+    path('projects/<int:project_pk>/issues', views.issues, name="issues"),
+    path('projects/<int:project_pk>/issues/<int:issue_pk>', views.view_issue, name="view_issue"),
+    path('projects/<int:pk>/add-decision', views.add_decision, name="add_decision"),
+    path('projects/<int:project_pk>/decisions', views.decisions, name="decisions"),
+    path('projects/<int:project_pk>/decisions/<int:decision_pk>', views.view_decision, name="view_decision"),
+    path('projects/<int:pk>/add-dependency', views.add_dependency, name="add_dependency"),
+    path('projects/<int:project_pk>/dependencies', views.dependencies, name="dependencies"),
+    path('projects/<int:project_pk>/dependencies/<int:dependency_pk>', views.view_dependency, name="view_dependency"),
+
+    path('delete-project/<int:pk>/', views.delete_project, name='delete_project'),
 
     
 

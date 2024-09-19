@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import CreateAccountForm, SignInForm, CreateProjectForm, AddRiskForm, AddActionForm, AddAssumptionForm
+from .forms import CreateAccountForm, SignInForm, CreateProjectForm, AddRiskForm, AddActionForm, AddAssumptionForm, AddIssueForm, AddDecisionForm, AddDependencyForm
 from django.http import HttpResponseRedirect
 
 from django.contrib.auth import login, logout, authenticate
@@ -92,9 +92,13 @@ def view_project(request, pk):
     
     this_project = get_object_or_404(project, pk=pk)
     form = CreateProjectForm(instance=this_project)
-    risks = risk.objects.filter(project=this_project)
     
     if request.method == 'POST':
+        if 'delete_project' in request.POST:
+            # Delete the project and redirect to a project list page or homepage
+            this_project.delete()
+            return redirect('projects')
+        
         form = CreateProjectForm(request.POST, instance=this_project)
         if form.is_valid():
             form.save()
@@ -102,7 +106,6 @@ def view_project(request, pk):
     context = {
         'project': this_project,
         'form': form,
-        'risks': risks,
     }
     return render(request, "view_project.html", context=context)
 
@@ -118,7 +121,7 @@ def add_risk(request, pk):
             new_risk.project = this_project
             new_risk.owner = current_user
             new_risk.save()
-            return redirect('view_project', pk)
+            return redirect('risks', pk)
         else:
             print(form.errors)
 
@@ -136,6 +139,12 @@ def view_risk(request, project_pk, risk_pk):
     current_user = request.user
 
     if request.method == 'POST':
+
+        if 'delete_risk' in request.POST:
+            # Delete the project and redirect to a project list page or homepage
+            this_risk.delete()
+            return redirect('risks')
+        
         form = AddRiskForm(request.POST, instance=this_risk)
         if form.is_valid():
             new_risk = form.save(commit=False)
@@ -177,8 +186,7 @@ def add_action(request, pk):
             new_action.project = this_project
             new_action.owner = current_user
             new_action.save()
-
-            return redirect('view_project', pk)
+            return redirect('actions', pk)
         else:
             print(form.errors)
 
@@ -209,6 +217,12 @@ def view_action(request, project_pk, action_pk):
     current_user = request.user
 
     if request.method == 'POST':
+
+        if 'delete_action' in request.POST:
+            # Delete the project and redirect to a project list page or homepage
+            this_action.delete()
+            return redirect('risks')
+        
         form = AddActionForm(request.POST, instance=this_action)
         if form.is_valid():
             new_action = form.save(commit=False)
@@ -216,7 +230,7 @@ def view_action(request, project_pk, action_pk):
             new_action.owner = current_user.username
             new_action.save()
 
-            return redirect('view_project', project_pk)
+            return redirect('actions', project_pk)
         else:
             print(form.errors)
 
@@ -236,7 +250,7 @@ def add_assumption(request, pk):
             new_assumption = form.save(commit=False)
             new_assumption.project = this_project
             new_assumption.save()
-            return redirect('view_project', pk)
+            return redirect('assumptions', pk)
         else:
             print(form.errors)
 
@@ -251,8 +265,7 @@ def assumptions(request, project_pk):
     
     this_project = get_object_or_404(project, pk=project_pk)
     assumptions = assumption.objects.filter(project=this_project)
-    
-    print(assumptions)
+
     context = {
         'project': this_project,
         'assumptions': assumptions,
@@ -272,7 +285,7 @@ def view_assumption(request, project_pk, assumption_pk):
             new_assumption.project = this_project
             new_assumption.save()
 
-            return redirect('view_project', project_pk)
+            return redirect('assumptions', project_pk)
         else:
             print(form.errors)
     context = {
@@ -280,3 +293,175 @@ def view_assumption(request, project_pk, assumption_pk):
     }
    
     return render(request, 'view_assumption.html', context=context)
+
+@login_required
+def add_issue(request, pk):
+    this_project = get_object_or_404(project, pk=pk)
+    current_user = request.user
+    form = AddIssueForm()
+    if request.method == 'POST':
+        form = AddIssueForm(request.POST)
+        if form.is_valid():
+            new_issue = form.save(commit=False)
+            new_issue.project = this_project
+            new_issue.owner = current_user
+            new_issue.save()
+            return redirect('issues', pk)
+        else:
+            print(form.errors)
+
+    context = {
+        'form':form,
+    }
+   
+    return render(request, 'add_issue.html', context=context)
+
+@login_required
+def view_issue(request, project_pk, issue_pk):
+    this_project = get_object_or_404(project, pk=project_pk)
+    this_issue = get_object_or_404(issue, pk=issue_pk, project=this_project)
+    form = AddIssueForm(instance=this_issue)
+    current_user = request.user
+    if request.method == 'POST':
+        form = AddIssueForm(request.POST, instance=this_issue)
+        if form.is_valid():
+            new_issue = form.save(commit=False)
+            new_issue.project = this_project
+            new_issue.owner = current_user.username
+            new_issue.save()
+            return redirect('issues', project_pk)
+        else:
+            print(form.errors)
+
+    context = {
+        'form':form,
+    }
+   
+    return render(request, 'view_issue.html', context=context)
+
+@login_required
+def issues(request, project_pk):
+    
+    this_project = get_object_or_404(project, pk=project_pk)
+    issues = issue.objects.filter(project=this_project)
+
+    context = {
+        'project': this_project,
+        'issues': issues,
+    }
+    return render(request, "issue_list.html", context=context)
+
+@login_required
+def add_decision(request, pk):
+    this_project = get_object_or_404(project, pk=pk)
+    current_user = request.user
+    form = AddDecisionForm()
+    if request.method == 'POST':
+        form = AddDecisionForm(request.POST)
+        if form.is_valid():
+            new_decision = form.save(commit=False)
+            new_decision.project = this_project
+            new_decision.save()
+            return redirect('decisions', pk)
+        else:
+            print(form.errors)
+
+    context = {
+        'form':form,
+    }
+   
+    return render(request, 'add_decision.html', context=context)
+
+
+@login_required
+def decisions(request, project_pk):
+    
+    this_project = get_object_or_404(project, pk=project_pk)
+    decisions = decision.objects.filter(project=this_project)
+
+    context = {
+        'project': this_project,
+        'decisions': decisions,
+    }
+    return render(request, "decision_list.html", context=context)
+
+
+@login_required
+def view_decision(request, project_pk, decision_pk):
+    this_project = get_object_or_404(project, pk=project_pk)
+    this_decision = get_object_or_404(decision, pk=decision_pk, project=this_project)
+    form = AddDecisionForm(instance=this_decision)
+    if request.method == 'POST':
+        form = AddDecisionForm(request.POST, instance=this_decision)
+        if form.is_valid():
+            new_decision = form.save(commit=False)
+            new_decision.project = this_project
+            new_decision.save()
+            return redirect('decisions', project_pk)
+        else:
+            print(form.errors)
+
+    context = {
+        'form':form,
+    }
+   
+    return render(request, 'view_decision.html', context=context)
+
+@login_required
+def add_dependency(request, pk):
+    this_project = get_object_or_404(project, pk=pk)
+    form = AddDependencyForm()
+    if request.method == 'POST':
+        form = AddDependencyForm(request.POST)
+        if form.is_valid():
+            new_dependency = form.save(commit=False)
+            new_dependency.project = this_project
+            new_dependency.save()
+            return redirect('dependencies', pk)
+        else:
+            print(form.errors)
+
+    context = {
+        'form':form,
+    }
+   
+    return render(request, 'add_dependency.html', context=context)
+
+@login_required
+def dependencies(request, project_pk):
+    
+    this_project = get_object_or_404(project, pk=project_pk)
+    dependencies = dependency.objects.filter(project=this_project)
+
+    context = {
+        'project': this_project,
+        'dependencies': dependencies,
+    }
+    return render(request, "dependency_list.html", context=context)
+
+@login_required
+def view_dependency(request, project_pk, dependency_pk):
+    this_project = get_object_or_404(project, pk=project_pk)
+    this_dependency = get_object_or_404(dependency, pk=dependency_pk, project=this_project)
+    form = AddDependencyForm(instance=this_dependency)
+    if request.method == 'POST':
+        form = AddDependencyForm(request.POST, instance=this_dependency)
+        if form.is_valid():
+            new_dependency = form.save(commit=False)
+            new_dependency.project = this_project
+            new_dependency.save()
+            return redirect('dependencies', project_pk)
+        else:
+            print(form.errors)
+
+    context = {
+        'form':form,
+    }
+   
+    return render(request, 'view_dependency.html', context=context)
+
+@login_required
+def delete_project(request, pk):
+    project_to_delete = get_object_or_404(project, pk=pk)
+    project_to_delete.delete()
+    return render(request, 'project_list.html')

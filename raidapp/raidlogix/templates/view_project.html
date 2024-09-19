@@ -37,22 +37,22 @@
                 <div id="edit-project-vertical-wrapper">
                     <div class="edit-project-card">
                         <div class="edit-project-card-text">Issues</div>
-                        <a class="edit-wrapper-link" href="#"><div>Create</div></a>
-                        <a class="edit-wrapper-link" href="#"><div>View</div></a>
+                        <a class="edit-wrapper-link" href="{% url 'add_issue' project.pk %}"><div>Create</div></a>
+                        <a class="edit-wrapper-link" href="{% url 'issues' project.pk %}"><div>View</div></a>
                     </div>
                 </div>
                 <div id="edit-project-vertical-wrapper">
                     <div class="edit-project-card">
                         <div class="edit-project-card-text">Decisions</div>
-                        <a class="edit-wrapper-link" href="#"><div>Create</div></a>
-                        <a class="edit-wrapper-link" href="#"><div>View</div></a>
+                        <a class="edit-wrapper-link" href="{% url 'add_decision' project.pk %}"><div>Create</div></a>
+                        <a class="edit-wrapper-link" href="{% url 'decisions' project.pk %}"><div>View</div></a>
                     </div>
                 </div>
                 <div id="edit-project-vertical-wrapper">
                     <div class="edit-project-card">
                         <div class="edit-project-card-text">Dependencies</div>
-                        <a class="edit-wrapper-link" href="#"><div>Create</div></a>
-                        <a class="edit-wrapper-link" href="#"><div>View</div></a>
+                        <a class="edit-wrapper-link" href="{% url 'add_dependency' project.pk %}"><div>Create</div></a>
+                        <a class="edit-wrapper-link" href="{% url 'dependencies' project.pk %}"><div>View</div></a>
                     </div>
                 </div>
             </div>
@@ -74,12 +74,29 @@
                                 {{ form.description }}
                             </div>
                         </div>
+                        <div id="project-buttons">
                         <a href="#"><input id="edit-project-button" type="submit" value="Update"/></a>
+
+                        <a href="{% url 'projects' %}" id="back-to-projects"><input id="add-attribute-submit" value="Back to Projects"/></a>
+
+                        <button type="submit" class="delete-item" name="delete_project" onclick="return confirm('Are you sure you want to delete this project?');">
+                            Delete Project
+                        </button>
+                        </div>
+
+
                     </div>
+
+
+                    
                  </form>
             </div>
 
-            <a href="{% url 'projects' %}" id="back-to-projects"><input id="add-attribute-submit" type="submit" value="Back to Projects"/></a>
+
+
+
+
+            
     </div>
         
 

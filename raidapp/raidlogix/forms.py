@@ -2,7 +2,7 @@ from django import forms
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
-from .models import project, risk, action, assumption
+from .models import project, risk, action, assumption, issue, decision, dependency
 from django.forms.widgets import PasswordInput, TextInput
 
 class CreateAccountForm(UserCreationForm):
@@ -134,6 +134,85 @@ class AddAssumptionForm(ModelForm):
             'notes': forms.Textarea(attrs={'placeholder': 'Notes'}),
         }
 
+class AddIssueForm(ModelForm):
+    class Meta:
+        model = issue
+        #REMEMBER TO ADD PROJECT AND OWNER TO THE OBJECT IN VIEWS.PY
+        fields = ['created', 'name', 'description', 'state', 'importance', 'impact', 'impact_details', 'response_status', 'resolution', 'date_resolved', 'root_cause',]
 
+        labels = {
+            'created': '', 
+            'name': '', 
+            'description': '', 
+            'state': '', 
+            'importance': '', 
+            'impact': '', 
+            'impact_details': '', 
+            'response_status': '', 
+            'resolution': '', 
+            'date_resolved': '', 
+            'root_cause': '', 
+        }
 
+        widgets = {
+            'created': forms.TextInput(attrs={'placeholder': 'Date Created'}),
+            'name': forms.TextInput(attrs={'placeholder': 'Name'}),
+            'description': forms.Textarea(attrs={'placeholder': 'Description'}),
+            'state': forms.TextInput(attrs={'placeholder': 'State'}),
+            'importance': forms.NumberInput(attrs={'placeholder': 'Importance'}),
+            'impact': forms.NumberInput(attrs={'placeholder': 'Impact'}),
+            'impact_details': forms.Textarea(attrs={'placeholder': 'Impact Details'}),
+            'response_status': forms.Textarea(attrs={'placeholder': 'Response Status'}),
+            'resolution': forms.Textarea(attrs={'placeholder': 'Resolution'}),
+            'date_resolved': forms.TextInput(attrs={'placeholder': 'Date Resolved'}),
+            'root_cause': forms.Textarea(attrs={'placeholder': 'Root Cause'}),
+        }
+
+class AddDecisionForm(ModelForm):
+    class Meta:
+        model = decision
+        #REMEMBER TO ADD PROJECT TO THE OBJECT IN VIEWS.PY
+        fields = ['created', 'name', 'description', 'due', 'state', 'decision_made', 'justification', 'impact', 'importance']
+
+        labels = {
+            'created': '', 
+            'name': '', 
+            'description': '', 
+            'due': '', 
+            'state': '', 
+            'decision_made': '', 
+            'justification': '', 
+            'impact': '', 
+            'importance': '', 
+        }
+        widgets = {
+            'created': forms.TextInput(attrs={'placeholder': 'Date Created'}),
+            'name': forms.TextInput(attrs={'placeholder': 'Name'}),
+            'description': forms.Textarea(attrs={'placeholder': 'Description'}),
+            'due': forms.TextInput(attrs={'placeholder': 'Due Date'}),
+            'state': forms.TextInput(attrs={'placeholder': 'State'}),
+            'decision_made': forms.TextInput(attrs={'placeholder': 'Decision Made'}),
+            'justification': forms.Textarea(attrs={'placeholder': 'Justification'}),
+            'impact': forms.Textarea(attrs={'placeholder': 'Impact'}),
+            'importance': forms.NumberInput(attrs={'placeholder': 'Importance'}),
+        }
     
+class AddDependencyForm(ModelForm):
+    class Meta:
+        model = dependency
+        #REMEMBER TO ADD PROJECT TO THE OBJECT IN VIEWS.PY
+        fields = [ 'name', 'due' ,'description', 'budget',]
+
+        labels = {
+            'name': '', 
+            'due': '', 
+            'description': '', 
+            'budget': '', 
+        }
+
+        widgets = {
+            'name': forms.TextInput(attrs={'placeholder': 'Name'}),
+            'description': forms.Textarea(attrs={'placeholder': 'Description'}),
+            'due': forms.TextInput(attrs={'placeholder': 'Due Date'}),
+            'budget': forms.TextInput(attrs={'placeholder': 'Budget'}),
+        }

@@ -1,0 +1,39 @@
+{% extends 'h_and_f.html' %}
+
+{% block content %}
+
+<div id="block-attribute-list">
+
+    <div class="attribute-text"><p>Dependencies</p></div>
+    <div id="project-attribute-container">
+        {% if dependencies.count == 0 %}
+            <h1 id="empty-projects">NO DEPENDENCIES</h1>
+        {% else %}
+            {% for dependency in dependencies %}
+                <a id="project-container-link" href="{% url 'view_dependency' project.pk dependency.pk %}">
+                    <div class="project-container">
+                        <div class="left-project-container">
+                            <div class="project-value">Name: <p class="project-list-value">&nbsp;{{ dependency.name }}</p></div>
+                            <div class="project-value">Due Date: <p class="project-list-value">&nbsp;{{ dependency.due }}</p></div>
+                        </div>
+
+                        <div class="right-project-container">
+                            <div class="project-value">Description: <p class="project-list-value">&nbsp;{{ dependency.description }}</p></div>
+                            <div class="project-value">Budget: <p class="project-list-value">&nbsp;{{ dependency.budget }}</p></div>
+                        </div>
+
+                    </div>
+                </a>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <a href="{% url 'view_project' project.pk %}" id="reroute-project"><input id="add-attribute-submit" type="submit" value="Back to Project"/></a>
+    
+
+</div>
+
+
+
+
+{% endblock content %}

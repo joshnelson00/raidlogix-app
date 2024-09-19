@@ -97,7 +97,7 @@ class dependency(models.Model):
     name = models.CharField(max_length=50)
     due = models.CharField(max_length=50)
     description = models.TextField()
-    budget = models.FloatField()
+    budget = models.CharField(max_length=50)
     project = models.ForeignKey(project, on_delete=models.CASCADE)
 
 class user_projects(models.Model):
