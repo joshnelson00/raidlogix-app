@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import CreateAccountForm, SignInForm, CreateProjectForm, AddRiskForm, AddActionForm
+from .forms import CreateAccountForm, SignInForm, CreateProjectForm, AddRiskForm, AddActionForm, AddAssumptionForm
 from django.http import HttpResponseRedirect
 
 from django.contrib.auth import login, logout, authenticate
@@ -93,7 +93,7 @@ def view_project(request, pk):
     this_project = get_object_or_404(project, pk=pk)
     form = CreateProjectForm(instance=this_project)
     risks = risk.objects.filter(project=this_project)
-
+    
     if request.method == 'POST':
         form = CreateProjectForm(request.POST, instance=this_project)
         if form.is_valid():
@@ -200,6 +200,7 @@ def actions(request, project_pk):
     }
     return render(request, "action_list.html", context=context)
 
+
 @login_required
 def view_action(request, project_pk, action_pk):
     this_project = get_object_or_404(project, pk=project_pk)
@@ -225,5 +226,57 @@ def view_action(request, project_pk, action_pk):
    
     return render(request, 'view_action.html', context=context)
 
+@login_required
+def add_assumption(request, pk):
+    this_project = get_object_or_404(project, pk=pk)
+    form = AddAssumptionForm()
+    if request.method == 'POST':
+        form = AddAssumptionForm(request.POST)
+        if form.is_valid():
+            new_assumption = form.save(commit=False)
+            new_assumption.project = this_project
+            new_assumption.save()
+            return redirect('view_project', pk)
+        else:
+            print(form.errors)
 
+    context = {
+        'form':form
+    }
+   
+    return render(request, 'add_assumption.html', context=context)
 
+@login_required
+def assumptions(request, project_pk):
+    
+    this_project = get_object_or_404(project, pk=project_pk)
+    assumptions = assumption.objects.filter(project=this_project)
+    
+    print(assumptions)
+    context = {
+        'project': this_project,
+        'assumptions': assumptions,
+    }
+    return render(request, "assumption_list.html", context=context)
+
+@login_required
+def view_assumption(request, project_pk, assumption_pk):
+    this_project = get_object_or_404(project, pk=project_pk)
+    this_assumption = get_object_or_404(assumption, pk=assumption_pk, project=this_project)
+    form = AddAssumptionForm(instance=this_assumption)
+
+    if request.method == 'POST':
+        form = AddAssumptionForm(request.POST, instance=this_assumption)
+        if form.is_valid():
+            new_assumption = form.save(commit=False)
+            new_assumption.project = this_project
+            new_assumption.save()
+
+            return redirect('view_project', project_pk)
+        else:
+            print(form.errors)
+    context = {
+        'form':form
+    }
+   
+    return render(request, 'view_assumption.html', context=context)

@@ -67,7 +67,6 @@ class assumption(models.Model):
     created = models.CharField(max_length=50)
     name = models.CharField(max_length=50)
     description = models.TextField()
-    updated = models.TextField()
     item = models.TextField()
     notes = models.TextField()
     project = models.ForeignKey(project, on_delete = models.CASCADE)

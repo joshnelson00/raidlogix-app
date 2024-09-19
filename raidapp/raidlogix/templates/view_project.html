@@ -27,8 +27,8 @@
                 <div id="edit-project-vertical-wrapper">
                     <div class="edit-project-card">
                         <div class="edit-project-card-text">Assumptions</div>
-                        <a class="edit-wrapper-link" href="#"><div>Create</div></a>
-                        <a class="edit-wrapper-link" href="#"><div>View</div></a>
+                        <a class="edit-wrapper-link" href="{% url 'add_assumption' project.pk %}"><div>Create</div></a>
+                        <a class="edit-wrapper-link" href="{% url 'assumptions' project.pk %}"><div>View</div></a>
                     </div>
                 </div>
             </div>

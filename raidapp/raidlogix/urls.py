@@ -17,6 +17,9 @@ urlpatterns = [
     path('projects/<int:pk>/add-action', views.add_action, name="add_action"),
     path('projects/<int:project_pk>/actions', views.actions, name="actions"),
     path('projects/<int:project_pk>/actions/<int:action_pk>', views.view_action, name="view_action"),
+    path('projects/<int:pk>/add-assumption', views.add_assumption, name="add_assumption"),
+    path('projects/<int:project_pk>/assumptions', views.assumptions, name="assumptions"),
+    path('projects/<int:project_pk>/assumptions/<int:assumption_pk>', views.view_assumption, name="view_assumption"),
 
     
 

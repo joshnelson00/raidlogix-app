@@ -511,6 +511,9 @@ body {
     height: 110px;
     display: flex;
     flex-direction: row;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .project-container:hover {
@@ -529,7 +532,7 @@ body {
 }
 
 .right-project-container {
-    width: 50%;
+    width: 45%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -537,6 +540,9 @@ body {
     padding-top:2%;
     padding-bottom: 2%;
     padding-right: 0.5%;
+    overflow: hidden; /* Hide the overflowing text */
+    white-space: nowrap; /* Prevent the text from wrapping */
+    text-overflow: ellipsis;
 }
 
 .project-value {
@@ -987,6 +993,7 @@ body {
     text-align: center;
     width: 100%;
     vertical-align: middle;
+    font-family: "Roboto-Medium";
 }
 
 .add-attribute-form > input{
@@ -1201,5 +1208,34 @@ body {
     color: #fff;
 }
 
+#add-assumption-textarea textarea{
+    width: 28.5%;
+    padding: 0.75%;
+    margin-top: 0.75%;
+    margin-bottom: 0.75%;
+    position: relative;
+    left:35%;
+}
+#add-assumption-textarea {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    width: 100%;
+}
 
+#add-attribute-submit-assumption {
+    font-family: "Request";
+    width: 70%;
+    margin-top: 4%;
+    background-color: #3C096C; /* This should now apply */
+    padding: 2%;
+    border-radius: 22px;
+    border-color: #9D4EDD;
+    border-width: 3px;
+    border-style: solid;
+    color: #fff;
+}
 
+#add-attribute-submit-assumption:hover {
+    cursor: pointer;
+}

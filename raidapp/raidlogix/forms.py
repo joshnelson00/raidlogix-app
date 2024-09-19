@@ -2,7 +2,7 @@ from django import forms
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
-from .models import project, risk, action
+from .models import project, risk, action, assumption
 from django.forms.widgets import PasswordInput, TextInput
 
 class CreateAccountForm(UserCreationForm):
@@ -110,6 +110,28 @@ class AddActionForm(ModelForm):
             'due_date': forms.TextInput(attrs={'placeholder': 'Due Date'}),
             'importance': forms.NumberInput(attrs={'placeholder': 'Importance'}),
             'action_source': forms.TextInput(attrs={'placeholder': 'Action Source'}),
+        }
+
+class AddAssumptionForm(ModelForm):
+    class Meta:
+        model = assumption
+        #REMEMBER TO ADD PROJECT AND OWNER TO THE OBJECT IN VIEWS.PY
+        fields = ['created', 'name', 'description', 'item', 'notes']
+
+        labels = {
+            'created': '', 
+            'name': '', 
+            'description': '', 
+            'item': '', 
+            'notes': '',
+        }
+
+        widgets = {
+            'created': forms.TextInput(attrs={'placeholder': 'Date Created'}),
+            'name': forms.TextInput(attrs={'placeholder': 'Name'}),
+            'description': forms.Textarea(attrs={'placeholder': 'Description'}),
+            'item': forms.Textarea(attrs={'placeholder': 'Item'}),
+            'notes': forms.Textarea(attrs={'placeholder': 'Notes'}),
         }
 
 
