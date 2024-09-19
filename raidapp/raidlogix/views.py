@@ -23,6 +23,13 @@ def create_account(request):
             form.save()
             return redirect("home")
 
+        else:
+            # Add error messages for invalid form
+            for field in form:
+                for error in field.errors:
+                    messages.error(request, error)
+            for error in form.non_field_errors():
+                messages.error(request, error)
     context = {'form':form}
 
     return render(request, 'create_account.html', context=context)
@@ -143,7 +150,7 @@ def view_risk(request, project_pk, risk_pk):
         if 'delete_risk' in request.POST:
             # Delete the project and redirect to a project list page or homepage
             this_risk.delete()
-            return redirect('risks')
+            return redirect('risks', project_pk=this_project.pk)
         
         form = AddRiskForm(request.POST, instance=this_risk)
         if form.is_valid():
@@ -221,7 +228,7 @@ def view_action(request, project_pk, action_pk):
         if 'delete_action' in request.POST:
             # Delete the project and redirect to a project list page or homepage
             this_action.delete()
-            return redirect('risks')
+            return redirect('risks', project_pk=this_project.pk)
         
         form = AddActionForm(request.POST, instance=this_action)
         if form.is_valid():
@@ -279,6 +286,10 @@ def view_assumption(request, project_pk, assumption_pk):
     form = AddAssumptionForm(instance=this_assumption)
 
     if request.method == 'POST':
+        if 'delete_action' in request.POST:
+            # Delete the project and redirect to a project list page or homepage
+            this_assumption.delete()
+            return redirect('assumptions', project_pk=this_project.pk)
         form = AddAssumptionForm(request.POST, instance=this_assumption)
         if form.is_valid():
             new_assumption = form.save(commit=False)
@@ -323,6 +334,10 @@ def view_issue(request, project_pk, issue_pk):
     form = AddIssueForm(instance=this_issue)
     current_user = request.user
     if request.method == 'POST':
+        if 'delete_issue' in request.POST:
+            # Delete the project and redirect to a project list page or homepage
+            this_issue.delete()
+            return redirect('issues', project_pk=this_project.pk)
         form = AddIssueForm(request.POST, instance=this_issue)
         if form.is_valid():
             new_issue = form.save(commit=False)
@@ -392,6 +407,10 @@ def view_decision(request, project_pk, decision_pk):
     this_decision = get_object_or_404(decision, pk=decision_pk, project=this_project)
     form = AddDecisionForm(instance=this_decision)
     if request.method == 'POST':
+        if 'delete_decision' in request.POST:
+            # Delete the project and redirect to a project list page or homepage
+            this_decision.delete()
+            return redirect('decisions', project_pk=this_project.pk)
         form = AddDecisionForm(request.POST, instance=this_decision)
         if form.is_valid():
             new_decision = form.save(commit=False)
@@ -445,6 +464,10 @@ def view_dependency(request, project_pk, dependency_pk):
     this_dependency = get_object_or_404(dependency, pk=dependency_pk, project=this_project)
     form = AddDependencyForm(instance=this_dependency)
     if request.method == 'POST':
+        if 'delete_dependency' in request.POST:
+            # Delete the project and redirect to a project list page or homepage
+            this_dependency.delete()
+            return redirect('dependencies', project_pk=this_project.pk)
         form = AddDependencyForm(request.POST, instance=this_dependency)
         if form.is_valid():
             new_dependency = form.save(commit=False)

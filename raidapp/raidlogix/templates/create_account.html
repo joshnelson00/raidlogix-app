@@ -23,9 +23,19 @@
                     {{form.password2.label}}
                     {{form.password2}}
                 </div>
+
+                <div class="error-message-container">
+                    {% if form.password2.errors %}
+                        <ul>
+                            {% for error in form.password2.errors %}
+                                <li class="error-message">{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
                 
 
-                <a href="#" id="create-account-submit"><input id="create-account-submit" type="submit" value="Create Account"/></a>
+                <a href="#" id=""><input id="create-account-submit" type="submit" value="Create Account"/></a>
             </form>
             
         </div>

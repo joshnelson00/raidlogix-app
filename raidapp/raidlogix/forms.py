@@ -19,6 +19,28 @@ class CreateAccountForm(UserCreationForm):
             'password2': 'Confirm Password',
         }
 
+        def clean_password2(self):
+            password1 = self.cleaned_data.get('password1')
+            password2 = self.cleaned_data.get('password2')
+
+            if password1 and password2 and password1 != password2:
+                raise forms.ValidationError(_("Passwords do not match."))
+            # Check password requirements
+            if len(password1) < 8:
+                raise forms.ValidationError(_("Password must be at least 8 characters long."))
+            if not any(char.isdigit() for char in password1):
+                raise forms.ValidationError(_("Password must contain at least one digit."))
+            if not any(char.isalpha() for char in password1):
+                raise forms.ValidationError(_("Password must contain at least one letter."))
+            # Add more requirements as needed
+            return password2
+        
+        def clean_username(self):
+            username = self.cleaned_data.get('username')
+            if User.objects.filter(username=username).exists():
+                raise forms.ValidationError("Username Already Taken.")
+            return username
+
 
 
 class SignInForm(AuthenticationForm):

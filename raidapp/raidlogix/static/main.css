@@ -86,11 +86,15 @@ body {
     margin-right: 3%;
     font-size: 22px;
     text-decoration: none;
+    transition: transform .125s;
 }
 
 #navbar ul li a{ 
     text-decoration: none;
     color: #ffffff;
+}
+#navbar ul li:hover { 
+    transform: scale(1.1);
 }
 
 
@@ -268,6 +272,7 @@ body {
 }
 
 
+
 .login-wrapper a {
     text-align: center;
     border: 4px solid #3C096C;
@@ -283,14 +288,15 @@ body {
     font-size: 30px;
     width: 100%;
     white-space: nowrap;
+    text-decoration: none;
+    transition: transform .125s, background-color .125s;
 }
 
-.login-wrapper a{
-    text-decoration: none;
-    color: white;
-}
+
+
 .login-wrapper a:hover{
     text-decoration: none;
+    transform: scale(1.1);
     background-color: #8642bd;
 }
 
@@ -360,13 +366,18 @@ body {
 #create-account-submit {
     color: #ffffff;
     font-family: "Request";
-    width: 70%;
-    margin-top: 1.5%;
+    width: 100%;
+    margin-top: 2%;
+    transition: transform .125s, border-color .125s, background-color .125s; /* Add transition for border and background */
+    border: 4px solid; /* Initialize border */
+    border-color: #3C096C;
 }
+
 #create-account-submit:hover {
-    color: lightgray;
-    font-family: "Request";
-    cursor:pointer;
+    cursor: pointer;
+    transform: scale(1.1);
+    background-color: transparent; /* Keeps the background transparent */
+    border-color: #3C096C; /* Set border color on hover */
 }
 
 
@@ -382,13 +393,17 @@ body {
 #sign-in-submit {
     color: #ffffff;
     font-family: "Request";
-    width: 60%;
-    margin-top: 1.5%;
+    width: 100%;
+    border-color: #3C096C;
+    margin-top: 10%;
+    transition: transform .125s, background-color .125s;
 }
 #sign-in-submit:hover {
-    color: lightgray;
+
     font-family: "Request";
     cursor:pointer;
+    transform: scale(1.1);
+
 }
 
 #block-sign-in {
@@ -410,12 +425,15 @@ body {
     font-size: 20px;
 }
 
+
 .sign-in-form {
     background-color: #9D4EDD;
     margin-bottom: 3.25%;
     border-radius: 25px;
     padding-top: 2%;
     padding-bottom: 3%;
+    padding-left: 1.5%;
+    padding-right: 1.5%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -426,7 +444,28 @@ body {
     color: #FFFFFF;
 }
 
-.sign-in-form input {
+.sign-in-form input[type="submit"] {
+    border: 10px;
+    width: 100%;
+    height: 40px;
+    padding-left: 25px;
+    padding-right: 25px;
+    border-radius: 20px;
+    background-color: #3C096C;
+    border-color: #fff;
+    border-width: 4px;
+    border-style: solid;
+}
+
+.sign-in-form input[type="submit"]:hover {
+    background-color: transparent;
+    border-color: #3C096C;
+}
+
+.sign-in-form input[type="text"] {
+    color:#ffffff;
+    font-family: "Roboto-Medium";
+    font-size: 20px;
     border: 10px;
     width: 450px;
     height: 40px;
@@ -437,16 +476,18 @@ body {
     background-color: #3C096C;
 }
 
-.sign-in-form input[type="text"] {
-    color:#ffffff;
-    font-family: "Roboto-Medium";
-    font-size: 20px;
-}
-
 .sign-in-form input[type="password"] {
     color:#ffffff;
     font-family: "Roboto-Medium";
     font-size: 20px;
+    border: 10px;
+    width: 450px;
+    height: 40px;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 0px;
+    border-radius: 20px;
+    background-color: #3C096C;
 }
 
 /* PROJECT LIST PAGE */
@@ -514,10 +555,13 @@ body {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    transition: transform .125s, background-color .125s;
 }
 
 .project-container:hover {
     background-color: #8141b5;
+    transform: scale(1.02);
+
 }
 
 .left-project-container {
@@ -586,19 +630,23 @@ body {
     text-align: center;
     border-radius: 20px;
     width: 100%;
+    transition: transform .125s, background-color .125s;
 }
+
 
 
 
 .submenu-item a{
     text-decoration: none;
     color: #FFFFFF;
+    
 }
 
 .submenu-item:hover{
     text-decoration: none;
-    background-color: #45007A;
+    background-color: #4f1585;
     cursor: pointer;
+    transform: scale(1.1);
 }
 
 
@@ -720,7 +768,7 @@ body {
     color: #ffffff;
     background-color: #3C096C;
     font-family: "Request";
-    width: 40%;
+    width: 50%;
     position: relative;
     border-radius: 25px;
     padding-top: 1%;
@@ -728,10 +776,12 @@ body {
     border-color: #9D4EDD;
     border-width: 3px;
     border-style: solid;
+    transition: transform .125s, background-color .125s;
 }
 #create-project-button:hover {
     cursor:pointer;
-    color: lightgray;
+    transform: scale(1.1);
+    background-color:#4f1585;
 }
 
 #empty-projects {
@@ -932,7 +982,7 @@ body {
     border-style: solid;
     bottom: 10px;
     margin-bottom: 7%;
-    transition: transform .125, background-color, .125s;
+    transition: transform .125s, background-color, .125s;
 }
 
 #edit-project-button:hover {
@@ -1284,6 +1334,28 @@ body {
     background-color: red;
     color: white;
     transition: 0.2s;
-    transform: scale(1.5);
+    transform: scale(1.2);
     cursor: pointer;
+}
+
+.error-message {
+    font-family: "Roboto-Medium";
+    color: white;
+    font-size: 18px;
+    list-style-type: none;
+    text-align: center;
+}
+
+.error-message-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Optional: to vertically center content */
+    position: relative;
+    right:3%;
+}
+
+.sign-in-alert-danger {
+    font-family: "Roboto-Medium";
+    font-size: 14px;
 }
