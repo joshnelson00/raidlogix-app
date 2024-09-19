@@ -14,21 +14,21 @@
                     <div class="edit-project-card">
                         <div class="edit-project-card-text">Risks</div>
                         <a class="edit-wrapper-link" href="{% url 'add_risk' project.pk %}"><div>Create</div></a>
-                        <a class="edit-wrapper-link" href="#"><div>Edit</div></a>
+                        <a class="edit-wrapper-link" href="{% url 'risks' project.pk %}"><div>View</div></a>
                     </div>
                 </div>
                 <div id="edit-project-vertical-wrapper">
                     <div class="edit-project-card">
                         <div class="edit-project-card-text">Actions</div>
-                        <a class="edit-wrapper-link" href="#"><div>Create</div></a>
-                        <a class="edit-wrapper-link" href="#"><div>Edit</div></a>
+                        <a class="edit-wrapper-link" href="{% url 'add_action' project.pk %}"><div>Create</div></a>
+                        <a class="edit-wrapper-link" href="{% url 'actions' project.pk %}"><div>View</div></a>
                     </div>
                 </div>
                 <div id="edit-project-vertical-wrapper">
                     <div class="edit-project-card">
                         <div class="edit-project-card-text">Assumptions</div>
                         <a class="edit-wrapper-link" href="#"><div>Create</div></a>
-                        <a class="edit-wrapper-link" href="#"><div>Edit</div></a>
+                        <a class="edit-wrapper-link" href="#"><div>View</div></a>
                     </div>
                 </div>
             </div>
@@ -38,25 +38,26 @@
                     <div class="edit-project-card">
                         <div class="edit-project-card-text">Issues</div>
                         <a class="edit-wrapper-link" href="#"><div>Create</div></a>
-                        <a class="edit-wrapper-link" href="#"><div>Edit</div></a>
+                        <a class="edit-wrapper-link" href="#"><div>View</div></a>
                     </div>
                 </div>
                 <div id="edit-project-vertical-wrapper">
                     <div class="edit-project-card">
                         <div class="edit-project-card-text">Decisions</div>
                         <a class="edit-wrapper-link" href="#"><div>Create</div></a>
-                        <a class="edit-wrapper-link" href="#"><div>Edit</div></a>
+                        <a class="edit-wrapper-link" href="#"><div>View</div></a>
                     </div>
                 </div>
                 <div id="edit-project-vertical-wrapper">
                     <div class="edit-project-card">
                         <div class="edit-project-card-text">Dependencies</div>
                         <a class="edit-wrapper-link" href="#"><div>Create</div></a>
-                        <a class="edit-wrapper-link" href="#"><div>Edit</div></a>
+                        <a class="edit-wrapper-link" href="#"><div>View</div></a>
                     </div>
                 </div>
             </div>
             <!--END OF CARDS-->
+
             <div class="edit-form-input-wrapper">
                 <form action="" method="post" class="edit-project-form">
                     {% csrf_token %}
@@ -78,29 +79,7 @@
                  </form>
             </div>
 
-            <div id="project-attribute-container">
-
-                {% for risk in risks%}
-                <a id="project-container-link" href="{% url 'view_risk' project.pk risk.pk %}"></a>
-                    <div class="project-container">
-                        <div class="left-project-container">
-                            <div class="project-value">Name: <p class="project-list-value">&nbsp;{{ risk.name }}</p></div>
-                            <div class="project-value">State: <p class="project-list-value">&nbsp;{{ risk.state }}</p></div>
-                        </div>
-                        <div class="right-project-container">
-                            <div class="project-value">Score: <p class="project-list-value">&nbsp;{{ risk.score }}</p></div>
-                            <div class="project-value">Trigger Date: <p class="project-list-value">&nbsp;{{ risk.trigger_date }}</p></div>
-                        </div>
-                    </div>
-                    </a>
-                {% endfor %}
-
-            </div>
-
-
-
-
-        
+            <a href="{% url 'projects' %}" id="back-to-projects"><input id="add-attribute-submit" type="submit" value="Back to Projects"/></a>
     </div>
         
 

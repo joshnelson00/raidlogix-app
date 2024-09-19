@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import CreateAccountForm, SignInForm, CreateProjectForm, AddRiskForm
+from .forms import CreateAccountForm, SignInForm, CreateProjectForm, AddRiskForm, AddActionForm
 from django.http import HttpResponseRedirect
 
 from django.contrib.auth import login, logout, authenticate
@@ -63,6 +63,7 @@ def projects(request):
     }
 
     return render(request, 'project_list.html', context)
+
 @login_required
 def create_project(request):
     form = CreateProjectForm()
@@ -133,24 +134,96 @@ def view_risk(request, project_pk, risk_pk):
     this_risk = get_object_or_404(risk, pk=risk_pk, project=this_project)
     form = AddRiskForm(instance=this_risk)
     current_user = request.user
+
     if request.method == 'POST':
-        form = AddRiskForm(request.POST)
+        form = AddRiskForm(request.POST, instance=this_risk)
         if form.is_valid():
             new_risk = form.save(commit=False)
             new_risk.project = this_project
-            new_risk.owner = current_user
+            new_risk.owner = current_user.username
             new_risk.save()
-            return redirect('view_project', project_pk)
+            return redirect('risks', project_pk)
         else:
             print(form.errors)
             
     context = {
+        'form':form,
+
+    }
+   
+    return render(request, 'view_risk.html', context=context)
+
+@login_required
+def risks(request, project_pk):
+    
+    this_project = get_object_or_404(project, pk=project_pk)
+    risks = risk.objects.filter(project=this_project)
+
+    context = {
+        'project': this_project,
+        'risks': risks,
+    }
+    return render(request, "risk_list.html", context=context)
+
+@login_required
+def add_action(request, pk):
+    this_project = get_object_or_404(project, pk=pk)
+    form = AddActionForm()
+    current_user = request.user
+    if request.method == 'POST':
+        form = AddActionForm(request.POST)
+        if form.is_valid():
+            new_action = form.save(commit=False)
+            new_action.project = this_project
+            new_action.owner = current_user
+            new_action.save()
+
+            return redirect('view_project', pk)
+        else:
+            print(form.errors)
+
+    context = {
         'form':form
     }
    
-    return render(request, 'add_risk.html', context=context)
+    return render(request, 'add_action.html', context=context)
 
 
+@login_required
+def actions(request, project_pk):
+    
+    this_project = get_object_or_404(project, pk=project_pk)
+    actions = action.objects.filter(project=this_project)
+    context = {
+        'project': this_project,
+        'actions': actions,
+    }
+    return render(request, "action_list.html", context=context)
+
+@login_required
+def view_action(request, project_pk, action_pk):
+    this_project = get_object_or_404(project, pk=project_pk)
+    this_action = get_object_or_404(action, pk=action_pk, project=this_project)
+    form = AddActionForm(instance=this_action)
+    current_user = request.user
+
+    if request.method == 'POST':
+        form = AddActionForm(request.POST, instance=this_action)
+        if form.is_valid():
+            new_action = form.save(commit=False)
+            new_action.project = this_project
+            new_action.owner = current_user.username
+            new_action.save()
+
+            return redirect('view_project', project_pk)
+        else:
+            print(form.errors)
+
+    context = {
+        'form':form
+    }
+   
+    return render(request, 'view_action.html', context=context)
 
 
 

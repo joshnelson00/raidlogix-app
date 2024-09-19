@@ -1,10 +1,14 @@
 {% extends 'h_and_f.html' %}
+{% load static %}
 
 {% block content %}
 
 <div id="block-add-risk">
 
-    <h1 id="add-attribute-header">Add Risk</h1>
+    <h1 id="add-attribute-header">{{ form.name.value }}</h1>
+
+
+
     <form action="" method="post" class="add-attribute-form">
         {% csrf_token %}
         {{ form.created }}
@@ -25,21 +29,21 @@
                 {{ form.score }}
             </div>
         </div>
+        
         </div>
         {{ form.date_raised }}
         {{ form.trigger_date }}
         {{ form.date_closed }}
         {{ form.response_strategy }}
         {{ form.response_plan_state }}
-        <a href="#" id="add-attribute-submit-a"><input id="add-attribute-submit" type="submit" value="Add Risk"/></a>
+        <a href="#" id="add-attribute-submit-a"><input id="add-attribute-submit" type="submit" value="Save"/></a>
         
 
     </form>
 
 
 </div>
-
-
+        
 
 
 {% endblock content %}

@@ -1,0 +1,30 @@
+{% extends 'h_and_f.html' %}
+{% load static %}
+
+{% block content %}
+
+<div id="block-add-risk">
+
+    <h1 id="add-attribute-header">{{ form.name.value }}</h1>
+
+    <form action="" method="post" class="add-attribute-form">
+        {% csrf_token %}
+
+        {{ form.created }}
+        {{ form.name }}
+        <div class="add-action-form-textarea">
+            {{ form.description }}
+        </div>
+        {{ form.due_date }}
+        {{ form.state }}
+        {{ form.action_source }}
+        {{ form.importance }}
+        <a href="#" id="add-attribute-submit-a"><input id="add-attribute-submit" type="submit" value="Save"/></a>
+    </form>
+
+
+</div>
+        
+
+
+{% endblock content %}

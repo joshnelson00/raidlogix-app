@@ -12,7 +12,12 @@ urlpatterns = [
     path('create-project', views.create_project, name="create_project"),
     path('projects/<int:pk>/', views.view_project, name="view_project"),
     path('projects/<int:pk>/add-risk', views.add_risk, name="add_risk"),
-    path('projects/<int:project_pk>/<int:risk_pk>', views.view_risk, name="view_risk")
+    path('projects/<int:project_pk>/risks', views.risks, name="risks"),
+    path('projects/<int:project_pk>/risks/<int:risk_pk>', views.view_risk, name="view_risk"),
+    path('projects/<int:pk>/add-action', views.add_action, name="add_action"),
+    path('projects/<int:project_pk>/actions', views.actions, name="actions"),
+    path('projects/<int:project_pk>/actions/<int:action_pk>', views.view_action, name="view_action"),
+
     
 
 ]

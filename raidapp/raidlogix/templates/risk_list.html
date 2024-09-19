@@ -1,0 +1,41 @@
+{% extends 'h_and_f.html' %}
+
+{% block content %}
+
+<div id="block-attribute-list">
+
+    <div class="attribute-text"><p>Risks</p></div>
+    <div id="project-attribute-container">
+        {% if risks.count == 0 %}
+            <h1 id="empty-projects">NO RISKS</h1>
+
+        {% else %}
+            {% for risk in risks%}
+                <a id="project-container-link" href="{% url 'view_risk' project.pk risk.pk %}">
+                    <div class="project-container">
+
+                        <div class="left-project-container">
+                            <div class="project-value">Name: <p class="project-list-value">&nbsp;{{ risk.name }}</p></div>
+                            <div class="project-value">State: <p class="project-list-value">&nbsp;{{ risk.state }}</p></div>
+                        </div>
+
+                        <div class="right-project-container">
+                            <div class="project-value">Score: <p class="project-list-value">&nbsp;{{ risk.score }}</p></div>
+                            <div class="project-value">Trigger Date: <p class="project-list-value">&nbsp;{{ risk.trigger_date }}</p></div>
+                        </div>
+
+                    </div>
+                </a>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <a href="{% url 'view_project' project.pk %}" id="reroute-project"><input id="add-attribute-submit" type="submit" value="Back to Project"/></a>
+    
+
+</div>
+
+
+
+
+{% endblock content %}

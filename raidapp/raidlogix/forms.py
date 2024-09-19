@@ -2,7 +2,7 @@ from django import forms
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
-from .models import project, risk
+from .models import project, risk, action
 from django.forms.widgets import PasswordInput, TextInput
 
 class CreateAccountForm(UserCreationForm):
@@ -86,6 +86,31 @@ class AddRiskForm(ModelForm):
             'response_plan_state': forms.TextInput(attrs={'placeholder': 'Response Plan State'}),
         }
         
+class AddActionForm(ModelForm):
+    class Meta:
+        model = action
+        #REMEMBER TO ADD PROJECT AND OWNER TO THE OBJECT IN VIEWS.PY
+        fields = ['created', 'name', 'description', 'due_date', 'state', 'action_source', 'importance']
+
+        labels = {
+            'created': '', 
+            'name': '', 
+            'description': '', 
+            'due_date': '', 
+            'state': '', 
+            'action_source': '', 
+            'importance': '', 
+        }
+
+        widgets = {
+            'created': forms.TextInput(attrs={'placeholder': 'Date Created'}),
+            'name': forms.TextInput(attrs={'placeholder': 'Name'}),
+            'description': forms.Textarea(attrs={'placeholder': 'Description'}),
+            'state': forms.TextInput(attrs={'placeholder': 'State'}),
+            'due_date': forms.TextInput(attrs={'placeholder': 'Due Date'}),
+            'importance': forms.NumberInput(attrs={'placeholder': 'Importance'}),
+            'action_source': forms.TextInput(attrs={'placeholder': 'Action Source'}),
+        }
 
 
 

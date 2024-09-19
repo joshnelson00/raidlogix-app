@@ -874,6 +874,7 @@ body {
     width: 100%;
     height: 30vh;
     justify-content: center;
+    margin-bottom: 5%;
 }
 .edit-form-input-wrapper form {
     display: flex;
@@ -957,10 +958,16 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    width: 70%;
     height: auto;
-    background-color: #ffffff;
-    margin-top: 6%;
+    border-color: #9D4EDD;
+    border-width: 4px;
+    border-style: solid;
+    border-radius: 25px;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    color: #fff;
+    margin-bottom: 1%;
 }
 
 
@@ -1133,6 +1140,63 @@ body {
 }
 
 #add-attribute-header {
+    font-family: "Roboto-Medium";
+    color: #fff;
+}
+
+.attribute-text {
+    color:#fff;
+    font-family: "Request";
+    font-size:40px;
+    margin: 0%;
+}
+
+#block-attribute-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    margin-top: 7%;
+    margin-bottom: 2%;
+}
+
+#reroute-project {
+    width: 40%;
+    text-align: center;
+}
+
+#block-edit-risk {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 7%;
+    padding-bottom:1%;
+}
+
+#back-to-projects {
+    width: 50%;
+    text-align: center;
+    margin: 0%;
+}
+
+.add-action-form-textarea {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+.add-action-form-textarea textarea{
+    width: 28.5%;
+    padding: 0.75%;
+    position: relative;
+    left: 0.001%;
+    margin-top: 0.75%;
+    margin-bottom: 0.75%;
+}
+
+#add-attribute-head {
     font-family: "Request";
     color: #fff;
 }
