@@ -30,7 +30,12 @@ urlpatterns = [
     path('projects/<int:project_pk>/dependencies', views.dependencies, name="dependencies"),
     path('projects/<int:project_pk>/dependencies/<int:dependency_pk>', views.view_dependency, name="view_dependency"),
 
-    path('delete-project/<int:pk>/', views.delete_project, name='delete_project'),
+    path('projects/<int:project_pk>/tags', views.tags, name="tags"),
+    path('projects/<int:project_pk>/add-tag', views.add_tag, name="add_tag"),
+    path('projects/<int:project_pk>/tags/<int:tag_pk>', views.view_tag, name="view_tag"),
+    
+    path('profile-settings', views.profile, name="profile"),
+
 
     
 

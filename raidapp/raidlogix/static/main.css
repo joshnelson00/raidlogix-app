@@ -47,13 +47,26 @@ body {
 
 }
 
+#text-and-logo-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#raidlogix_logo {
+    width: 70px;
+    height: 70px;
+    position: relative;
+    top: 9.5px;
+    left:17px;
+}
 
 #header_title {
     font-size: 30px;
     margin:0%;
     position: relative;
     padding-right:45px;
-    margin-left: 45px;
+    margin-left: 35px;
     top: 20px;
 }
 
@@ -142,6 +155,16 @@ body {
 #footer_list a {
     color: white;
     text-decoration: none;
+}
+
+#footer_list ul li a {
+    color: white;
+    text-decoration: none;
+    transition: transform .125s;
+}
+
+#footer_list ul li a:hover {
+    transform: scale(1.1);
 }
 
 /* HOME PAGE */
@@ -515,6 +538,15 @@ body {
     text-decoration: none;
 }
 
+#project-container-link-tag {
+    width:94%;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    height:10%;
+}
+
 .project-outer-wrapper {
     width: 70%;
     display: flex;
@@ -556,6 +588,29 @@ body {
     white-space: nowrap;
     text-overflow: ellipsis;
     transition: transform .125s, background-color .125s;
+}
+
+.project-container-tag {
+    width: 100%;
+    background-color: #9D4EDD;
+    margin: 1%;
+    margin-top: 1.5%;
+    margin-bottom: 1.5%;
+    border-radius: 20px;
+    height: 70px;
+    padding-top:1%;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    transition: transform .125s, background-color .125s;
+}
+
+.project-container-tag:hover {
+    background-color: #8141b5;
+    transform: scale(1.02);
+
 }
 
 .project-container:hover {
@@ -1226,7 +1281,7 @@ body {
     width: 50%;
     text-align: center;
     position: relative;
-    margin-bottom: 7%;
+    margin-bottom: 8%;
 }
 
 .add-action-form-textarea {
@@ -1291,7 +1346,7 @@ body {
     border-width: 4px;
     border-radius: 20px;
     border-style: solid;
-    margin-top: 10%;
+    margin-top: 3%;
     color: red;
     padding: 1%;
     font-family: "Request";
@@ -1321,7 +1376,7 @@ body {
     border-width: 4px;
     border-radius: 30px;
     border-style: solid;
-    margin-top: 7%;
+    margin-top: 4%;
     color: red;
     padding: 0.75%;
     padding-left: 2%;
@@ -1358,4 +1413,25 @@ body {
 .sign-in-alert-danger {
     font-family: "Roboto-Medium";
     font-size: 14px;
+}
+
+#block-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 7%;
+}
+
+.footer-value {
+    font-family: "Request";
+    color: #fff;
+
+}
+#view-tags {
+    margin-bottom: 2%;
+    width: 38%;
+}
+
+#add-tag-button {
+    margin-bottom: 3%;
 }

@@ -1,8 +1,8 @@
 from django import forms
 from django.forms import ModelForm
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from django.contrib.auth.models import User
-from .models import project, risk, action, assumption, issue, decision, dependency
+from .models import project, risk, action, assumption, issue, decision, dependency, tag
 from django.forms.widgets import PasswordInput, TextInput
 
 class CreateAccountForm(UserCreationForm):
@@ -238,3 +238,39 @@ class AddDependencyForm(ModelForm):
             'due': forms.TextInput(attrs={'placeholder': 'Due Date'}),
             'budget': forms.TextInput(attrs={'placeholder': 'Budget'}),
         }
+
+class UserChangeForm(UserChangeForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password']
+
+        labels = {
+            'username': 'Username', 
+            'email': 'Email', 
+            'password': 'Password', 
+        }
+
+        widgets = {
+            'username': forms.TextInput(attrs={'placeholder': ''}),
+            'description': forms.Textarea(attrs={'placeholder': ''}),
+            'due': forms.TextInput(attrs={'placeholder': ''}),
+            'budget': forms.TextInput(attrs={'placeholder': ''}),
+        }
+
+
+class AddTagForm(ModelForm):
+    class Meta:
+        model = tag
+        fields = [ 'tag_name','description']
+
+        labels = {
+            'tag_name': '', 
+            'description': '', 
+        }
+
+        widgets = {
+            'tag_name': forms.TextInput(attrs={'placeholder': 'Name'}),
+            'description': forms.Textarea(attrs={'placeholder': 'Description'}),
+        }
+
+        

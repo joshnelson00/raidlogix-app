@@ -1,3 +1,4 @@
 .env
 raidapp/raidlogix/pycache/*
-raidapp/pycache/*
+raidlogix/__pycache__/
+raidlogix/migrations/

@@ -76,12 +76,15 @@
                         </div>
                         <div id="project-buttons">
                         <a href="#"><input id="edit-project-button" type="submit" value="Update"/></a>
+                        
+                        <a href="{% url 'tags' project.pk %}"  id="view-tags"><input id="add-attribute-submit" value="View Tags"/></a>
 
                         <a href="{% url 'projects' %}" id="back-to-projects"><input id="add-attribute-submit" value="Back to Projects"/></a>
 
                         <button type="submit" class="delete-item" name="delete_project" onclick="return confirm('Are you sure you want to delete this project?');">
                             Delete Project
                         </button>
+
                         </div>
 
 

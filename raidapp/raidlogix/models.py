@@ -104,10 +104,7 @@ class user_projects(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     project = models.ForeignKey(project, on_delete=models.CASCADE)
 
-class user_decisions(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    decision = models.ForeignKey(decision, on_delete=models.CASCADE)
-    description = models.TextField()
+
 
 class issue_tags(models.Model):
     tag = models.ForeignKey(tag, on_delete=models.CASCADE)
@@ -128,6 +125,12 @@ class assumption_tags(models.Model):
 class risk_tags(models.Model):
     tag = models.ForeignKey(tag, on_delete=models.CASCADE)
     risk = models.ForeignKey(risk, on_delete=models.CASCADE)
+
+class dependency_tags(models.Model):
+    tag = models.ForeignKey(tag, on_delete=models.CASCADE)
+    dependency = models.ForeignKey(dependency, on_delete=models.CASCADE)
+
+
 
     
     

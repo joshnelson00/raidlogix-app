@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import CreateAccountForm, SignInForm, CreateProjectForm, AddRiskForm, AddActionForm, AddAssumptionForm, AddIssueForm, AddDecisionForm, AddDependencyForm
-from django.http import HttpResponseRedirect
+from .forms import CreateAccountForm, SignInForm, CreateProjectForm, AddRiskForm, AddActionForm, AddAssumptionForm, AddIssueForm, AddDecisionForm, AddDependencyForm, UserChangeForm, AddTagForm
+from django.http import HttpResponseRedirect, HttpResponseForbidden
 
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import auth
@@ -24,7 +24,6 @@ def create_account(request):
             return redirect("home")
 
         else:
-            # Add error messages for invalid form
             for field in form:
                 for error in field.errors:
                     messages.error(request, error)
@@ -62,7 +61,9 @@ def sign_out(request):
 @login_required
 def projects(request):
     current_user = request.user
+    # Query the user_projects model to get the project ids linked to the current user
     user_projects_list = user_projects.objects.filter(user=current_user)
+    # Use these project ids to filter the projects
     projects = project.objects.filter(id__in=user_projects_list.values_list('project_id', flat=True))
     context = {
         'projects': projects,
@@ -96,13 +97,15 @@ def create_project(request):
 
 @login_required
 def view_project(request, pk):
-    
+
     this_project = get_object_or_404(project, pk=pk)
+    if not user_projects.objects.filter(user=request.user, project=this_project).exists():
+        return HttpResponseForbidden("You do not have permission to access this project.")
+
     form = CreateProjectForm(instance=this_project)
     
     if request.method == 'POST':
         if 'delete_project' in request.POST:
-            # Delete the project and redirect to a project list page or homepage
             this_project.delete()
             return redirect('projects')
         
@@ -110,6 +113,7 @@ def view_project(request, pk):
         if form.is_valid():
             form.save()
             return redirect('view_project', pk)
+        
     context = {
         'project': this_project,
         'form': form,
@@ -119,6 +123,8 @@ def view_project(request, pk):
 @login_required
 def add_risk(request, pk):
     this_project = get_object_or_404(project, pk=pk)
+    if not user_projects.objects.filter(user=request.user, project=this_project).exists():
+        return HttpResponseForbidden("You do not have permission to access this project.")
     form = AddRiskForm()
     current_user = request.user
     if request.method == 'POST':
@@ -141,6 +147,8 @@ def add_risk(request, pk):
 @login_required
 def view_risk(request, project_pk, risk_pk):
     this_project = get_object_or_404(project, pk=project_pk)
+    if not user_projects.objects.filter(user=request.user, project=this_project).exists():
+        return HttpResponseForbidden("You do not have permission to access this project.")
     this_risk = get_object_or_404(risk, pk=risk_pk, project=this_project)
     form = AddRiskForm(instance=this_risk)
     current_user = request.user
@@ -173,6 +181,9 @@ def view_risk(request, project_pk, risk_pk):
 def risks(request, project_pk):
     
     this_project = get_object_or_404(project, pk=project_pk)
+    if not user_projects.objects.filter(user=request.user, project=this_project).exists():
+        return HttpResponseForbidden("You do not have permission to access this project.")
+    
     risks = risk.objects.filter(project=this_project)
 
     context = {
@@ -184,6 +195,9 @@ def risks(request, project_pk):
 @login_required
 def add_action(request, pk):
     this_project = get_object_or_404(project, pk=pk)
+    if not user_projects.objects.filter(user=request.user, project=this_project).exists():
+        return HttpResponseForbidden("You do not have permission to access this project.")
+
     form = AddActionForm()
     current_user = request.user
     if request.method == 'POST':
@@ -208,6 +222,9 @@ def add_action(request, pk):
 def actions(request, project_pk):
     
     this_project = get_object_or_404(project, pk=project_pk)
+    if not user_projects.objects.filter(user=request.user, project=this_project).exists():
+        return HttpResponseForbidden("You do not have permission to access this project.")
+    
     actions = action.objects.filter(project=this_project)
     context = {
         'project': this_project,
@@ -218,7 +235,11 @@ def actions(request, project_pk):
 
 @login_required
 def view_action(request, project_pk, action_pk):
+
     this_project = get_object_or_404(project, pk=project_pk)
+    if not user_projects.objects.filter(user=request.user, project=this_project).exists():
+        return HttpResponseForbidden("You do not have permission to access this project.")
+    
     this_action = get_object_or_404(action, pk=action_pk, project=this_project)
     form = AddActionForm(instance=this_action)
     current_user = request.user
@@ -228,7 +249,7 @@ def view_action(request, project_pk, action_pk):
         if 'delete_action' in request.POST:
             # Delete the project and redirect to a project list page or homepage
             this_action.delete()
-            return redirect('risks', project_pk=this_project.pk)
+            return redirect('actions', project_pk=this_project.pk)
         
         form = AddActionForm(request.POST, instance=this_action)
         if form.is_valid():
@@ -250,6 +271,9 @@ def view_action(request, project_pk, action_pk):
 @login_required
 def add_assumption(request, pk):
     this_project = get_object_or_404(project, pk=pk)
+    if not user_projects.objects.filter(user=request.user, project=this_project).exists():
+        return HttpResponseForbidden("You do not have permission to access this project.")
+    
     form = AddAssumptionForm()
     if request.method == 'POST':
         form = AddAssumptionForm(request.POST)
@@ -271,6 +295,9 @@ def add_assumption(request, pk):
 def assumptions(request, project_pk):
     
     this_project = get_object_or_404(project, pk=project_pk)
+    if not user_projects.objects.filter(user=request.user, project=this_project).exists():
+        return HttpResponseForbidden("You do not have permission to access this project.")
+    
     assumptions = assumption.objects.filter(project=this_project)
 
     context = {
@@ -282,11 +309,14 @@ def assumptions(request, project_pk):
 @login_required
 def view_assumption(request, project_pk, assumption_pk):
     this_project = get_object_or_404(project, pk=project_pk)
+    if not user_projects.objects.filter(user=request.user, project=this_project).exists():
+        return HttpResponseForbidden("You do not have permission to access this project.")
+    
     this_assumption = get_object_or_404(assumption, pk=assumption_pk, project=this_project)
     form = AddAssumptionForm(instance=this_assumption)
 
     if request.method == 'POST':
-        if 'delete_action' in request.POST:
+        if 'delete_assumption' in request.POST:
             # Delete the project and redirect to a project list page or homepage
             this_assumption.delete()
             return redirect('assumptions', project_pk=this_project.pk)
@@ -307,7 +337,11 @@ def view_assumption(request, project_pk, assumption_pk):
 
 @login_required
 def add_issue(request, pk):
+
     this_project = get_object_or_404(project, pk=pk)
+    if not user_projects.objects.filter(user=request.user, project=this_project).exists():
+        return HttpResponseForbidden("You do not have permission to access this project.")
+    
     current_user = request.user
     form = AddIssueForm()
     if request.method == 'POST':
@@ -330,6 +364,9 @@ def add_issue(request, pk):
 @login_required
 def view_issue(request, project_pk, issue_pk):
     this_project = get_object_or_404(project, pk=project_pk)
+    if not user_projects.objects.filter(user=request.user, project=this_project).exists():
+        return HttpResponseForbidden("You do not have permission to access this project.")
+    
     this_issue = get_object_or_404(issue, pk=issue_pk, project=this_project)
     form = AddIssueForm(instance=this_issue)
     current_user = request.user
@@ -358,6 +395,9 @@ def view_issue(request, project_pk, issue_pk):
 def issues(request, project_pk):
     
     this_project = get_object_or_404(project, pk=project_pk)
+    if not user_projects.objects.filter(user=request.user, project=this_project).exists():
+        return HttpResponseForbidden("You do not have permission to access this project.")
+    
     issues = issue.objects.filter(project=this_project)
 
     context = {
@@ -369,7 +409,10 @@ def issues(request, project_pk):
 @login_required
 def add_decision(request, pk):
     this_project = get_object_or_404(project, pk=pk)
-    current_user = request.user
+
+    if not user_projects.objects.filter(user=request.user, project=this_project).exists():
+        return HttpResponseForbidden("You do not have permission to access this project.")
+    
     form = AddDecisionForm()
     if request.method == 'POST':
         form = AddDecisionForm(request.POST)
@@ -377,6 +420,7 @@ def add_decision(request, pk):
             new_decision = form.save(commit=False)
             new_decision.project = this_project
             new_decision.save()
+
             return redirect('decisions', pk)
         else:
             print(form.errors)
@@ -392,6 +436,8 @@ def add_decision(request, pk):
 def decisions(request, project_pk):
     
     this_project = get_object_or_404(project, pk=project_pk)
+    if not user_projects.objects.filter(user=request.user, project=this_project).exists():
+        return HttpResponseForbidden("You do not have permission to access this project.")
     decisions = decision.objects.filter(project=this_project)
 
     context = {
@@ -403,7 +449,11 @@ def decisions(request, project_pk):
 
 @login_required
 def view_decision(request, project_pk, decision_pk):
+
     this_project = get_object_or_404(project, pk=project_pk)
+    if not user_projects.objects.filter(user=request.user, project=this_project).exists():
+        return HttpResponseForbidden("You do not have permission to access this project.")
+    
     this_decision = get_object_or_404(decision, pk=decision_pk, project=this_project)
     form = AddDecisionForm(instance=this_decision)
     if request.method == 'POST':
@@ -428,7 +478,11 @@ def view_decision(request, project_pk, decision_pk):
 
 @login_required
 def add_dependency(request, pk):
+
     this_project = get_object_or_404(project, pk=pk)
+    if not user_projects.objects.filter(user=request.user, project=this_project).exists():
+        return HttpResponseForbidden("You do not have permission to access this project.")
+    
     form = AddDependencyForm()
     if request.method == 'POST':
         form = AddDependencyForm(request.POST)
@@ -450,6 +504,9 @@ def add_dependency(request, pk):
 def dependencies(request, project_pk):
     
     this_project = get_object_or_404(project, pk=project_pk)
+    if not user_projects.objects.filter(user=request.user, project=this_project).exists():
+        return HttpResponseForbidden("You do not have permission to access this project.")
+    
     dependencies = dependency.objects.filter(project=this_project)
 
     context = {
@@ -458,17 +515,23 @@ def dependencies(request, project_pk):
     }
     return render(request, "dependency_list.html", context=context)
 
+
 @login_required
 def view_dependency(request, project_pk, dependency_pk):
     this_project = get_object_or_404(project, pk=project_pk)
+    if not user_projects.objects.filter(user=request.user, project=this_project).exists():
+        return HttpResponseForbidden("You do not have permission to access this project.")
+    
     this_dependency = get_object_or_404(dependency, pk=dependency_pk, project=this_project)
     form = AddDependencyForm(instance=this_dependency)
+
     if request.method == 'POST':
         if 'delete_dependency' in request.POST:
-            # Delete the project and redirect to a project list page or homepage
             this_dependency.delete()
             return redirect('dependencies', project_pk=this_project.pk)
+        
         form = AddDependencyForm(request.POST, instance=this_dependency)
+
         if form.is_valid():
             new_dependency = form.save(commit=False)
             new_dependency.project = this_project
@@ -483,8 +546,91 @@ def view_dependency(request, project_pk, dependency_pk):
    
     return render(request, 'view_dependency.html', context=context)
 
+
 @login_required
-def delete_project(request, pk):
-    project_to_delete = get_object_or_404(project, pk=pk)
-    project_to_delete.delete()
-    return render(request, 'project_list.html')
+def profile(request):
+    current_user = request.user
+
+
+    context = {
+        'user':current_user,
+    }
+    return render(request, "profile.html", context=context)
+
+
+@login_required
+def tags(request, project_pk):
+
+    this_project = get_object_or_404(project, pk=project_pk)
+    tags = tag.objects.filter(project=this_project)
+    
+    if not user_projects.objects.filter(user=request.user, project=this_project).exists():
+        return HttpResponseForbidden("You do not have permission to access this project.")
+    
+    context = {
+        'tags':tags, 
+        'project':this_project,
+
+    }
+
+    return render(request, 'tag_list.html', context=context)
+
+
+
+
+@login_required
+def add_tag(request, project_pk):
+    form = AddTagForm()
+    this_project = get_object_or_404(project, pk=project_pk)
+
+    if not user_projects.objects.filter(user=request.user, project=this_project).exists():
+        return HttpResponseForbidden("You do not have permission to access this project.")
+    
+    if request.method == 'POST':
+        form = AddTagForm(request.POST)
+        if form.is_valid():
+            tag = form.save(commit=False)
+            tag.project = this_project
+            tag.save()
+            
+            return redirect('tags', project_pk)
+        else:
+            print(form.errors)
+
+    context = {
+        'form':form,
+        'project':this_project
+    }
+
+    return render(request, 'add_tag.html', context=context)
+
+@login_required
+def view_tag(request, project_pk, tag_pk):
+    this_project = get_object_or_404(project, pk=project_pk)
+    if not user_projects.objects.filter(user=request.user, project=this_project).exists():
+        return HttpResponseForbidden("You do not have permission to access this project.")
+    
+    this_tag = get_object_or_404(tag, pk=tag_pk, project=this_project)
+    form = AddTagForm(instance=this_tag)
+
+    if request.method == 'POST':
+        if 'delete_tag' in request.POST:
+            this_tag.delete()
+            return redirect('tags', project_pk=this_project.pk)
+        
+        form = AddTagForm(request.POST, instance=this_tag)
+
+        if form.is_valid():
+            new_tag = form.save(commit=False)
+            new_tag.project = this_project
+            new_tag.save()
+            return redirect('tags', project_pk)
+        else:
+            print(form.errors)
+
+    context = {
+        'form':form,
+    }
+   
+    return render(request, 'view_tag.html', context=context)
+
