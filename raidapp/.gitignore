@@ -6,4 +6,5 @@ raidlogix/migrations/
 raidlogix/static/
 raidapp/settings.py
 raidapp/db.sqlite3
-
+.DS_Store
+Dockerfile
