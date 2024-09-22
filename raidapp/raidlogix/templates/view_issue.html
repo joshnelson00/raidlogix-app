@@ -37,10 +37,36 @@
         
 
         <a href="#" id="add-attribute-submit-a"><input id="add-attribute-submit-assumption" type="submit" value="Update"/></a>
+
+        <div id="attach-tag-button"><div class="submenu-item"><a href="{% url 'issues_tag' project.pk issue.pk %}">Attach Tag</a></div></div>
+
         <button type="submit" class="delete-attribute" name="delete_issue" onclick="return confirm('Are you sure you want to delete this issue?');">
             Delete Issue
         </button>
     </form>
+
+    <p id="attribute-tags-header" class="cool-text">Tags</p>
+    <div class="view-tags-container">
+        {% if issue_tags.count == 0 %}
+            <h1 id="empty-projects">NO TAGS</h1>
+        {% else %}
+            {% for tag in issue_tags %}
+                <a id="project-container-link" href="{% url 'view_tag' project.pk tag.tag.pk %}">
+                    <div class="project-container-tag">
+
+                        <div class="left-project-container">
+                            <div class="project-value">Name: <p class="project-list-value">&nbsp;{{ tag.tag.tag_name }}</p></div>
+                        </div>
+
+                        <div class="right-project-container">
+                            <div class="project-value">Description: <p class="project-list-value">&nbsp;{{tag.tag.description}}</p></div>
+                        </div>
+                    </div>
+                </a>
+
+            {% endfor %}
+        {% endif %}
+    </div>
 
 </div>
         

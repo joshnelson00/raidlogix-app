@@ -1,0 +1,23 @@
+{% extends 'h_and_f.html' %}
+
+{% block content %}
+<div class="block-user-info-change">
+    <h1 class="cool-text">Profile Settings</h1>
+
+    <div class="profile-info">
+        <p id= "profile-header1"class="cool-text">Change Username/Email</p>
+        <a href="{% url 'change_user_info' %}" id="create-project-submit-a"><input id="create-project-button" type="submit" value="Change"/></a>
+
+        <p id= "profile-header2" class="cool-text">Change Password</p>
+        <a href="{% url 'change_password' %}" id="create-project-submit-a"><input id="create-project-button" type="submit" value="Change"/></a>
+        <div id="date-joined">
+            <p class="cool-text">Date Joined</p>
+            <p class="lame-text">{{ date_created.date }}</p>
+        </div>
+
+    </div>
+    
+    
+    
+</div>
+{% endblock %}

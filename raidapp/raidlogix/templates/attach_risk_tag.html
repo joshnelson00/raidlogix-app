@@ -15,9 +15,12 @@
         {% if tags.count == 0 %}
             <h1 id="empty-projects">NO TAGS</h1>
 
+
+
+
         {% else %}
             {% for tag in tags %}
-                <a id="project-container-link" href="{% url 'view_tag' project.pk tag.pk %}">
+                <a id="project-container-link" href="{% url 'risk_attach_tag' project.pk risk.pk tag.pk %}">
                     <div class="project-container-tag">
 
                         <div class="left-project-container">
@@ -34,8 +37,6 @@
     </div>
 
     <a href="{% url 'view_project' project.pk %}" id="reroute-project"><input id="add-attribute-submit" type="submit" value="Back to Project"/></a>
-    
-
 </div>
 
 

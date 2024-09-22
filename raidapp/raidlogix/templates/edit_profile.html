@@ -1,0 +1,25 @@
+{% extends 'h_and_f.html' %}
+
+{% block content %}
+<div class="block-profile">
+
+    <h1 class="cool-text">Change Username/Email</h1>
+    <form action="" method="post" class="edit-profile">
+        {% csrf_token %}
+        <div class="edit-profile-container">
+            {{form.username.label}}
+            {{ form.username }}
+        </div>
+        
+        <div class="edit-profile-container">
+            {{form.email.label}}
+            {{ form.email }}
+        </div>
+        
+
+        
+        <a href="#" id="change-user-info-a"><input id="change-user-info" type="submit" value="Change"/></a>
+        
+    </form>
+</div>
+{% endblock %}

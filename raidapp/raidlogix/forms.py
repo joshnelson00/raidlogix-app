@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm, PasswordChangeForm
 from django.contrib.auth.models import User
 from .models import project, risk, action, assumption, issue, decision, dependency, tag
 from django.forms.widgets import PasswordInput, TextInput
@@ -10,7 +10,7 @@ class CreateAccountForm(UserCreationForm):
     class Meta:
         
         model = User
-        fields = ['username', 'email', 'password1', 'password2']
+        fields = ['username', 'email', 'password1', 'password2', 'first_name', 'last_name']
 
         labels = {
             'username': 'Username',
@@ -19,19 +19,25 @@ class CreateAccountForm(UserCreationForm):
             'password2': 'Confirm Password',
         }
 
+
+        widgets = {
+            'first_name': forms.TextInput(attrs={'placeholder': ''}),
+            'last_name': forms.TextInput(attrs={'placeholder': ''}),
+        }
+        
         def clean_password2(self):
             password1 = self.cleaned_data.get('password1')
             password2 = self.cleaned_data.get('password2')
 
             if password1 and password2 and password1 != password2:
-                raise forms.ValidationError(_("Passwords do not match."))
+                raise forms.ValidationError(("Passwords do not match."))
             # Check password requirements
             if len(password1) < 8:
-                raise forms.ValidationError(_("Password must be at least 8 characters long."))
+                raise forms.ValidationError(("Password must be at least 8 characters long."))
             if not any(char.isdigit() for char in password1):
-                raise forms.ValidationError(_("Password must contain at least one digit."))
+                raise forms.ValidationError(("Password must contain at least one digit."))
             if not any(char.isalpha() for char in password1):
-                raise forms.ValidationError(_("Password must contain at least one letter."))
+                raise forms.ValidationError(("Password must contain at least one letter."))
             # Add more requirements as needed
             return password2
         
@@ -239,23 +245,6 @@ class AddDependencyForm(ModelForm):
             'budget': forms.TextInput(attrs={'placeholder': 'Budget'}),
         }
 
-class UserChangeForm(UserChangeForm):
-    class Meta:
-        model = User
-        fields = ['username', 'email', 'password']
-
-        labels = {
-            'username': 'Username', 
-            'email': 'Email', 
-            'password': 'Password', 
-        }
-
-        widgets = {
-            'username': forms.TextInput(attrs={'placeholder': ''}),
-            'description': forms.Textarea(attrs={'placeholder': ''}),
-            'due': forms.TextInput(attrs={'placeholder': ''}),
-            'budget': forms.TextInput(attrs={'placeholder': ''}),
-        }
 
 
 class AddTagForm(ModelForm):
@@ -273,4 +262,20 @@ class AddTagForm(ModelForm):
             'description': forms.Textarea(attrs={'placeholder': 'Description'}),
         }
 
-        
+class EditProfileForm(UserChangeForm):
+    class Meta:
+        model = User
+        fields = ('username', 'email')
+
+
+
+class ChangePasswordForm(PasswordChangeForm):
+    class Meta:
+        model = User
+        fields = ('old_password', 'new_password1','new_password2')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['old_password'].label = "Old Password"
+        self.fields['new_password1'].label = "New Password"
+        self.fields['new_password2'].label = "Confirm Password"

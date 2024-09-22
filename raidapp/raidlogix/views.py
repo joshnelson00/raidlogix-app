@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import CreateAccountForm, SignInForm, CreateProjectForm, AddRiskForm, AddActionForm, AddAssumptionForm, AddIssueForm, AddDecisionForm, AddDependencyForm, UserChangeForm, AddTagForm
+from .forms import CreateAccountForm, SignInForm, CreateProjectForm, AddRiskForm, AddActionForm, AddAssumptionForm, AddIssueForm, AddDecisionForm, AddDependencyForm, AddTagForm, ChangePasswordForm, EditProfileForm
 from django.http import HttpResponseRedirect, HttpResponseForbidden
 
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import login, logout, authenticate, update_session_auth_hash
 from django.contrib.auth.models import auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -21,7 +21,7 @@ def create_account(request):
         form = CreateAccountForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("home")
+            return redirect("projects")
 
         else:
             for field in form:
@@ -153,6 +153,8 @@ def view_risk(request, project_pk, risk_pk):
     form = AddRiskForm(instance=this_risk)
     current_user = request.user
 
+    risk_tags = RiskTags.objects.filter(risk=this_risk)
+
     if request.method == 'POST':
 
         if 'delete_risk' in request.POST:
@@ -171,7 +173,10 @@ def view_risk(request, project_pk, risk_pk):
             print(form.errors)
             
     context = {
+        'project': this_project,
         'form':form,
+        'risk': this_risk,
+        'risk_tags': risk_tags,
 
     }
    
@@ -244,6 +249,8 @@ def view_action(request, project_pk, action_pk):
     form = AddActionForm(instance=this_action)
     current_user = request.user
 
+    action_tags = ActionTags.objects.filter(action=this_action)
+
     if request.method == 'POST':
 
         if 'delete_action' in request.POST:
@@ -263,7 +270,11 @@ def view_action(request, project_pk, action_pk):
             print(form.errors)
 
     context = {
-        'form':form
+        'project': this_project,
+        'form':form,
+        'action': this_action,
+        'action_tags':action_tags,
+
     }
    
     return render(request, 'view_action.html', context=context)
@@ -315,6 +326,8 @@ def view_assumption(request, project_pk, assumption_pk):
     this_assumption = get_object_or_404(assumption, pk=assumption_pk, project=this_project)
     form = AddAssumptionForm(instance=this_assumption)
 
+    assumption_tags = AssumptionTags.objects.filter(assumption=this_assumption)
+
     if request.method == 'POST':
         if 'delete_assumption' in request.POST:
             # Delete the project and redirect to a project list page or homepage
@@ -330,7 +343,11 @@ def view_assumption(request, project_pk, assumption_pk):
         else:
             print(form.errors)
     context = {
-        'form':form
+        'project': this_project,
+        'form':form,
+        'assumption': this_assumption,
+        'assumption_tags':assumption_tags,
+
     }
    
     return render(request, 'view_assumption.html', context=context)
@@ -370,6 +387,9 @@ def view_issue(request, project_pk, issue_pk):
     this_issue = get_object_or_404(issue, pk=issue_pk, project=this_project)
     form = AddIssueForm(instance=this_issue)
     current_user = request.user
+
+    issue_tags = IssueTags.objects.filter(issue=this_issue)
+
     if request.method == 'POST':
         if 'delete_issue' in request.POST:
             # Delete the project and redirect to a project list page or homepage
@@ -386,7 +406,11 @@ def view_issue(request, project_pk, issue_pk):
             print(form.errors)
 
     context = {
+        'project': this_project,
         'form':form,
+        'issue': this_issue,
+        'issue_tags':issue_tags,
+
     }
    
     return render(request, 'view_issue.html', context=context)
@@ -456,6 +480,9 @@ def view_decision(request, project_pk, decision_pk):
     
     this_decision = get_object_or_404(decision, pk=decision_pk, project=this_project)
     form = AddDecisionForm(instance=this_decision)
+
+    decision_tags = DecisionTags.objects.filter(decision=this_decision)
+
     if request.method == 'POST':
         if 'delete_decision' in request.POST:
             # Delete the project and redirect to a project list page or homepage
@@ -471,7 +498,11 @@ def view_decision(request, project_pk, decision_pk):
             print(form.errors)
 
     context = {
+        'project': this_project,
         'form':form,
+        'decision': this_decision,
+        'decision_tags':decision_tags,
+
     }
    
     return render(request, 'view_decision.html', context=context)
@@ -525,6 +556,8 @@ def view_dependency(request, project_pk, dependency_pk):
     this_dependency = get_object_or_404(dependency, pk=dependency_pk, project=this_project)
     form = AddDependencyForm(instance=this_dependency)
 
+    dependency_tags = DependencyTags.objects.filter(dependency=this_dependency)
+
     if request.method == 'POST':
         if 'delete_dependency' in request.POST:
             this_dependency.delete()
@@ -541,7 +574,11 @@ def view_dependency(request, project_pk, dependency_pk):
             print(form.errors)
 
     context = {
+        'project': this_project,
         'form':form,
+        'dependency': this_dependency,
+        'dependency_tags':dependency_tags,
+
     }
    
     return render(request, 'view_dependency.html', context=context)
@@ -570,9 +607,7 @@ def tags(request, project_pk):
     context = {
         'tags':tags, 
         'project':this_project,
-
     }
-
     return render(request, 'tag_list.html', context=context)
 
 
@@ -633,4 +668,311 @@ def view_tag(request, project_pk, tag_pk):
     }
    
     return render(request, 'view_tag.html', context=context)
+
+@login_required
+def profile(request):
+    user = request.user
+    date_created = user.date_joined
+
+    context = {
+        'date_created': date_created
+    }
+    return render(request, 'profile_settings.html', context=context)
+
+@login_required
+def change_user_info(request):
+    current_user = request.user
+    form = EditProfileForm(instance=current_user)
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, instance=current_user)
+        if form.is_valid():
+            form.save()
+            return redirect("profile")
+    context = {
+        'form':form
+    }
+    return render(request, 'edit_profile.html', context=context)
+
+@login_required
+def change_password(request):
+
+    current_user = request.user
+    form = ChangePasswordForm(user=current_user)
+    if request.method == 'POST':
+        form = ChangePasswordForm(data=request.POST, user=current_user)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            return redirect("profile")
+        else:
+            for field in form:
+                for error in field.errors:
+                    messages.error(request, error)
+            for error in form.non_field_errors():
+                messages.error(request, error)
+    context = {
+        'form':form
+    }
+    return render(request, 'change_password.html', context=context)
+
+@login_required
+def risk_tags(request, project_pk, risk_pk):
+
+    this_project = get_object_or_404(project, pk=project_pk)
+
+    tags = tag.objects.filter(project=this_project)
+
+    this_risk = get_object_or_404(risk, pk=risk_pk)
+
+    if not user_projects.objects.filter(user=request.user, project=this_project).exists():
+        return HttpResponseForbidden("You do not have permission to access this project.")
+    
+
+
+    context = {
+        'tags':tags, 
+        'project':this_project,
+        'risk':this_risk,
+    }
+
+    return render(request, 'attach_risk_tag.html', context=context)
+
+
+
+@login_required
+def action_tags(request, project_pk, action_pk):
+
+    this_project = get_object_or_404(project, pk=project_pk)
+
+    tags = tag.objects.filter(project=this_project)
+
+    this_action = get_object_or_404(action, pk=action_pk)
+
+    if not user_projects.objects.filter(user=request.user, project=this_project).exists():
+        return HttpResponseForbidden("You do not have permission to access this project.")
+    
+
+
+    context = {
+        'tags':tags, 
+        'project':this_project,
+        'action':this_action,
+    }
+
+    return render(request, 'attach_action_tag.html', context=context)
+
+@login_required
+def assumption_tags(request, project_pk, assumption_pk):
+
+    this_project = get_object_or_404(project, pk=project_pk)
+
+    tags = tag.objects.filter(project=this_project)
+
+    this_assumption = get_object_or_404(assumption, pk=assumption_pk)
+
+    if not user_projects.objects.filter(user=request.user, project=this_project).exists():
+        return HttpResponseForbidden("You do not have permission to access this project.")
+    
+
+
+    context = {
+        'tags':tags, 
+        'project':this_project,
+        'assumption':this_assumption,
+    }
+
+    return render(request, 'attach_assumption_tag.html', context=context)
+
+@login_required
+def issue_tags(request, project_pk, issue_pk):
+
+    this_project = get_object_or_404(project, pk=project_pk)
+
+    tags = tag.objects.filter(project=this_project)
+
+    this_issue = get_object_or_404(issue, pk=issue_pk)
+
+    if not user_projects.objects.filter(user=request.user, project=this_project).exists():
+        return HttpResponseForbidden("You do not have permission to access this project.")
+    
+
+
+    context = {
+        'tags':tags, 
+        'project':this_project,
+        'issue':this_issue,
+    }
+
+    return render(request, 'attach_issue_tag.html', context=context)
+
+@login_required
+def decision_tags(request, project_pk, decision_pk):
+
+    this_project = get_object_or_404(project, pk=project_pk)
+
+    tags = tag.objects.filter(project=this_project)
+
+    this_decision = get_object_or_404(decision, pk=decision_pk)
+
+    if not user_projects.objects.filter(user=request.user, project=this_project).exists():
+        return HttpResponseForbidden("You do not have permission to access this project.")
+    
+
+
+    context = {
+        'tags':tags, 
+        'project':this_project,
+        'decision':this_decision,
+    }
+
+    return render(request, 'attach_decision_tag.html', context=context)
+
+@login_required
+def dependency_tags(request, project_pk, dependency_pk):
+
+    this_project = get_object_or_404(project, pk=project_pk)
+
+    tags = tag.objects.filter(project=this_project)
+
+    this_dependency = get_object_or_404(dependency, pk=dependency_pk)
+
+    if not user_projects.objects.filter(user=request.user, project=this_project).exists():
+        return HttpResponseForbidden("You do not have permission to access this project.")
+    
+
+
+    context = {
+        'tags':tags, 
+        'project':this_project,
+        'dependency':this_dependency,
+    }
+
+    return render(request, 'attach_dependency_tag.html', context=context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@login_required
+def risk_attach_tag(request, project_pk, risk_pk, tag_pk):
+    this_project = get_object_or_404(project, pk=project_pk)
+    
+
+    if not user_projects.objects.filter(user=request.user, project=this_project).exists():
+        return HttpResponseForbidden("You do not have permission to access this project.")
+    
+    this_risk = get_object_or_404(risk, pk=risk_pk, project=this_project)
+    this_tag = get_object_or_404(tag, pk=tag_pk, project=this_project)
+
+    new_risk_tag = RiskTags(tag=this_tag, risk=this_risk)
+    new_risk_tag.save()
+
+
+    form = AddRiskForm(instance=this_risk)
+
+    
+
+    return redirect('view_risk', project_pk=project_pk, risk_pk=risk_pk)
+
+@login_required
+def action_attach_tag(request, project_pk, action_pk, tag_pk):
+    this_project = get_object_or_404(project, pk=project_pk)
+
+    if not user_projects.objects.filter(user=request.user, project=this_project).exists():
+        return HttpResponseForbidden("You do not have permission to access this project.")
+    
+    this_action = get_object_or_404(action, pk=action_pk, project=this_project)
+    this_tag = get_object_or_404(tag, pk=tag_pk, project=this_project)
+
+    new_action_tag = ActionTags(tag=this_tag, action=this_action)
+    new_action_tag.save()
+
+    form = AddActionForm(instance=this_action)
+
+    return redirect('view_action', project_pk=project_pk, action_pk=action_pk)
+
+@login_required
+def assumption_attach_tag(request, project_pk, assumption_pk, tag_pk):
+    this_project = get_object_or_404(project, pk=project_pk)
+
+    if not user_projects.objects.filter(user=request.user, project=this_project).exists():
+        return HttpResponseForbidden("You do not have permission to access this project.")
+    
+    this_assumption = get_object_or_404(assumption, pk=assumption_pk, project=this_project)
+    this_tag = get_object_or_404(tag, pk=tag_pk, project=this_project)
+
+    new_assumption_tag = AssumptionTags(tag=this_tag, assumption=this_assumption)
+    new_assumption_tag.save()
+
+    form = AddAssumptionForm(instance=this_assumption)
+
+    return redirect('view_assumption', project_pk=project_pk, assumption_pk=assumption_pk)
+
+@login_required
+def issue_attach_tag(request, project_pk, issue_pk, tag_pk):
+    this_project = get_object_or_404(project, pk=project_pk)
+
+    if not user_projects.objects.filter(user=request.user, project=this_project).exists():
+        return HttpResponseForbidden("You do not have permission to access this project.")
+    
+    this_issue = get_object_or_404(issue, pk=issue_pk, project=this_project)
+    this_tag = get_object_or_404(tag, pk=tag_pk, project=this_project)
+
+    new_issue_tag = IssueTags(tag=this_tag, issue=this_issue)
+    new_issue_tag.save()
+
+    form = AddIssueForm(instance=this_issue)
+
+    return redirect('view_issue', project_pk=project_pk, issue_pk=issue_pk)
+
+@login_required
+def decision_attach_tag(request, project_pk, decision_pk, tag_pk):
+    this_project = get_object_or_404(project, pk=project_pk)
+
+    if not user_projects.objects.filter(user=request.user, project=this_project).exists():
+        return HttpResponseForbidden("You do not have permission to access this project.")
+    
+    this_decision = get_object_or_404(decision, pk=decision_pk, project=this_project)
+    this_tag = get_object_or_404(tag, pk=tag_pk, project=this_project)
+
+    new_decision_tag = DecisionTags(tag=this_tag, decision=this_decision)
+    new_decision_tag.save()
+
+    form = AddDecisionForm(instance=this_decision)
+
+    return redirect('view_decision', project_pk=project_pk, decision_pk=decision_pk)
+
+@login_required
+def dependency_attach_tag(request, project_pk, dependency_pk, tag_pk):
+    this_project = get_object_or_404(project, pk=project_pk)
+
+    if not user_projects.objects.filter(user=request.user, project=this_project).exists():
+        return HttpResponseForbidden("You do not have permission to access this project.")
+    
+    this_dependency = get_object_or_404(dependency, pk=dependency_pk, project=this_project)
+    this_tag = get_object_or_404(tag, pk=tag_pk, project=this_project)
+
+    new_dependency_tag = DependencyTags(tag=this_tag, dependency=this_dependency)
+    new_dependency_tag.save()
+
+    form = AddDependencyForm(instance=this_dependency)
+
+    return redirect('view_dependency', project_pk=project_pk, dependency_pk=dependency_pk)
+
+
+
 

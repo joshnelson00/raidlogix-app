@@ -391,7 +391,7 @@ body {
     font-family: "Request";
     width: 100%;
     margin-top: 2%;
-    transition: transform .125s, border-color .125s, background-color .125s; /* Add transition for border and background */
+    transition: transform .125s, border-color .125s, background-color .125s; 
     border: 4px solid; /* Initialize border */
     border-color: #3C096C;
 }
@@ -399,7 +399,7 @@ body {
 #create-account-submit:hover {
     cursor: pointer;
     transform: scale(1.1);
-    background-color: transparent; /* Keeps the background transparent */
+    background-color: transparent;
     border-color: #3C096C; /* Set border color on hover */
 }
 
@@ -672,9 +672,9 @@ body {
 
 .submenu-item {
     font-family: "Request";
-    font-size: 16px;
-    padding-bottom:2%;
-    padding-top: 2%;
+    font-size: 14px;
+    padding-bottom:4%;
+    padding-top: 4%;
     padding-left:15%;
     padding-right:15%;
     margin: 3%;
@@ -1142,7 +1142,6 @@ body {
     background-color: #9D4EDD;
     border-width: 0px;
     color: #fff;
-    background-color: #9D4EDD;
     color: #FFFFFF;
     width:148%;
     border-radius: 10px;
@@ -1281,7 +1280,13 @@ body {
     width: 50%;
     text-align: center;
     position: relative;
-    margin-bottom: 8%;
+    margin-bottom: 5%;
+    text-decoration: none;
+}
+
+#create-project-submit-a:active, #create-project-submit-a:focus{
+    outline: none;
+    text-decoration: none;
 }
 
 .add-action-form-textarea {
@@ -1368,6 +1373,8 @@ body {
     align-items: center;
     position: relative;
     bottom:40%;
+    text-align: center;
+    
 }
 
 .delete-attribute {
@@ -1405,7 +1412,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* Optional: to vertically center content */
+    justify-content: center;
     position: relative;
     right:3%;
 }
@@ -1415,11 +1422,12 @@ body {
     font-size: 14px;
 }
 
-#block-profile {
+.block-profile {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 7%;
+    margin-bottom: 4%;
 }
 
 .footer-value {
@@ -1430,8 +1438,281 @@ body {
 #view-tags {
     margin-bottom: 2%;
     width: 38%;
+    text-decoration: none;
+    outline: none;
+    cursor: pointer;
 }
+#view-tags:focus, #view-tags:active, #view-tags:hover {
+    text-decoration: none;
+    outline: none;
+    cursor: pointer;
+    outline: none;
+
+}
+
+
+
+
 
 #add-tag-button {
     margin-bottom: 3%;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 25%;
+    border-color: #9D4EDD;
+    border-width: 4px;
+    border-style: solid;
+    padding: 3.5%;
+    padding-bottom: 0%;
+    padding-top:0.75%;
+    border-radius: 25px;
+    margin-bottom: 1%;
+}
+
+#date-joined {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 16px;
+}
+
+#date-joined .lame-text{
+    position: relative;
+    bottom: 20px;
+}
+
+.profile-info a input {
+    font-family: "Request";
+    width: 80%;
+    background-color: #3C096C; /* This should now apply */
+    padding: 3%;
+    border-radius: 22px;
+    border-color: #9D4EDD;
+    border-width: 3px;
+    border-style: solid;
+    color: #fff;
+    text-align: center;
+    transition: transform .125s, background-color .125s;
+}
+
+.profile-info a {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 9%;
+}
+
+
+.profile-info a input:hover {
+    font-family: "Request";
+    cursor: pointer;
+    background-color: #4f1585;
+    transform: scale(1.1);
+}
+
+#profile-header1 {
+    font-size: 18px;
+}
+
+#profile-header2 {  
+    font-size: 18px;
+}
+
+.block-user-info-change {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 7%;
+}
+
+.edit-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Request";
+    font-size: 20px;
+    color: #fff;
+}
+
+.edit-profile-container > input{
+    margin-top:0.75%;
+    margin-bottom:0.75%;
+    width: 200%;
+    background-color: #9D4EDD;
+    padding: 4%;
+    line-height:1.5;
+    border-width: 0px;
+    color: #FFFFFF;
+    border-radius: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 15px;
+    
+}
+
+
+#change-user-info-a {
+    text-align: center;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    text-decoration:none;
+}
+
+#change-user-info {
+    font-family: "Request";
+    width: 200%;
+    margin-top: 4%;
+    background-color: #3C096C; /* This should now apply */
+    padding: 6%;
+    border-radius: 22px;
+    border-color: #9D4EDD;
+    border-width: 3px;
+    border-style: solid;
+    color: #fff;
+    transition: transform .125s, background-color .125s;
+}
+
+#change-user-info:hover {
+    cursor: pointer;
+    background-color: #4f1585;
+    transform: scale(1.1);
+}
+
+.edit-profile-container {
+    margin-bottom: 5%;
+    margin-top: 6%;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: space-between;
+    width: 100%;
+    height: 90px;
+}
+
+.edit-profile-container p{
+    margin: 15%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 150%;
+    margin-bottom: 4%;
+}
+
+.edit-password-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Request";
+    font-size: 20px;
+    color: #fff;
+}
+
+.edit-password-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 155%;
+}
+
+.edit-password-container input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+
+.edit-password-container .edit-profile-container input {
+    margin-top:0.75%;
+    margin-bottom:0.75%;
+    width: 100%;
+    background-color: #9D4EDD;
+    padding: 2%;
+    border-width: 0px;
+    color: #FFFFFF;
+    border-radius: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 15px;
+}
+
+#view-tags-button {
+    color: #ffffff;
+    background-color: #3C096C;
+    font-family: "Request";
+    width: 20%;
+    position: relative;
+    border-radius: 25px;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+    padding-left: 1%;
+    padding-right: 1%;
+    border-color: #9D4EDD;
+    border-width: 3px;
+    border-style: solid;
+    bottom: 10px;
+    margin-top: 4.5%;
+    margin-bottom: 0.5%;
+    transition: transform .125s, background-color, .125s;
+    text-align: center;
+    outline: transparent;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+#view-tags-button:hover {
+    cursor:pointer;
+    background-color: #4f1585;
+    transform: scale(1.1);
+    text-decoration: none;
+    outline: transparent;
+    text-decoration: none;
+
+
+}
+
+#view-tags-button:active, #view-tags-button:focus {
+    outline: transparent;
+    text-decoration: none;
+}
+
+#attach-tag-button {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1%;
+}
+
+.view-tags-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+    height: auto;
+    border-color: #9D4EDD;
+    border-width: 4px;
+    border-style: solid;
+    border-radius: 25px;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    color: #fff;
+    margin-bottom: 1%;
+}
+
+#attribute-tags-header {
+    font-size: 35px;
+    margin-top: 3.5%;
 }

@@ -106,27 +106,27 @@ class user_projects(models.Model):
 
 
 
-class issue_tags(models.Model):
+class IssueTags(models.Model):
     tag = models.ForeignKey(tag, on_delete=models.CASCADE)
     issue = models.ForeignKey(issue, on_delete=models.CASCADE)
 
-class action_tags(models.Model):
+class ActionTags(models.Model):
     tag = models.ForeignKey(tag, on_delete=models.CASCADE)
     action = models.ForeignKey(action, on_delete=models.CASCADE)
 
-class decision_tags(models.Model):
+class DecisionTags(models.Model):
     tag = models.ForeignKey(tag, on_delete=models.CASCADE)
     decision = models.ForeignKey(decision, on_delete=models.CASCADE)
 
-class assumption_tags(models.Model):
+class AssumptionTags(models.Model):
     tag = models.ForeignKey(tag, on_delete=models.CASCADE)
     assumption = models.ForeignKey(assumption, on_delete=models.CASCADE)
 
-class risk_tags(models.Model):
+class RiskTags(models.Model):
     tag = models.ForeignKey(tag, on_delete=models.CASCADE)
     risk = models.ForeignKey(risk, on_delete=models.CASCADE)
 
-class dependency_tags(models.Model):
+class DependencyTags(models.Model):
     tag = models.ForeignKey(tag, on_delete=models.CASCADE)
     dependency = models.ForeignKey(dependency, on_delete=models.CASCADE)
 
