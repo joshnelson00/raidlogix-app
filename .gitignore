@@ -1,4 +1,9 @@
 .env
-raidapp/raidlogix/pycache/*
-raidlogix/__pycache__/
+*.sqlite3
+*.pyc
+raidlogix/__pychache__/
 raidlogix/migrations/
+raidlogix/static/
+raidapp/settings.py
+raidapp/db.sqlite3
+
