@@ -1,0 +1,10 @@
+raidapp/.env
+
+*.pyc
+raidapp/raidapp/__pychache__/*
+raidapp/raidlogix/migrations/*
+raidapp/raidlogix/static/*
+raidapp/raidapp/settings.py
+raidapp/db.sqlite3
+.DS_Store
+raidapp/Dockerfile
