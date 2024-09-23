@@ -1,5 +1,4 @@
 raidapp/.env
-
 *.pyc
 raidapp/raidapp/__pychache__/*
 raidapp/raidlogix/migrations/*
