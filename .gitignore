@@ -1,9 +1,12 @@
-raidapp/.env
-*.pyc
-raidapp/raidapp/__pychache__/*
+.venv/                     # Virtual environment
+db.sqlite3                 # SQLite database file
+*.pem                      # AWS PEM file
+*.pyc                      # Compiled Python files
+__pycache__/               # Python cache directories
+.env                       # Environment variables file (if you use one)
+*.log                      # Log files
+
 raidapp/raidlogix/migrations/*
-raidapp/raidlogix/static/*
-raidapp/raidapp/settings.py
-raidapp/db.sqlite3
-.DS_Store
-raidapp/Dockerfile
+!raidapp/raidlogix/migrations/__init__.py 
+
+docker-compose.override.yml 

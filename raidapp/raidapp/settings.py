@@ -16,7 +16,9 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 DEBUG = os.environ.get('DEBUG')
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '3.101.131.6:8000', '3.101.131.6', '0.0.0.0', '0.0.0.0:8000', '3.101.131.6:8000']
+ALLOWED_HOSTS = ['54.219.90.166', 'raidlogix.app', 'localhost', '127.0.0.1']
+
+CSRF_TRUSTED_ORIGINS = ['https://*.raidlogix.app', 'https://*.127.0.0.1']
 
 
 # Application definition
