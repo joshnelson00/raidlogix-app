@@ -24,7 +24,7 @@ This project is a web application designed to help product and project managers 
 If you encounter any bugs or issues while using the application, please follow these steps to report them:
 
 1. **Check Existing Issues**:
-   - Before reporting a new bug, check the [Issues](https://github.com/yourusername/raidlogix-app/issues) section of this repository to see if the bug has already been reported.
+   - Before reporting a new bug, check the [Issues](https://github.com/joshnelson00/raidlogix-app/issues) section of this repository to see if the bug has already been reported.
 
 2. **Provide Detailed Information**:
    - If you don't find an existing report, please create a new issue and provide the following details:
@@ -35,7 +35,7 @@ If you encounter any bugs or issues while using the application, please follow t
      - Information about your environment, such as your operating system, browser version, and Docker version.
 
 3. **Submit the Issue**:
-   - Submit the issue on the [Issues](https://github.com/yourusername/raidlogix-app/issues) page of this repository.
+   - Submit the issue on the [Issues](https://github.com/joshnelson00/raidlogix-app/issues) page of this repository.
 
 Thank you for helping improve the application!
 
