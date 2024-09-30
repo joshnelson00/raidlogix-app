@@ -10,7 +10,8 @@ This project is a web application designed to help product and project managers 
 * Containerized the application with Docker by building a Dockerfile to simplify environment setup and ensure consistent deployment
 * Deployed the application to an AWS EC2 instance, ensuring scalability and reliability in a cloud-hosted environment
 
-![Raidlogix Sample](./Raidlogix-Sample.png)
+![Raidlogix-Sample](https://github.com/user-attachments/assets/25dc69df-7591-4fbe-9bf9-d858082d2642)
+
 
 ## Follow these steps to install the application locally:
 
