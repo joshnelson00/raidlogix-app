@@ -12,7 +12,6 @@ This project is a web application designed to help product and project managers 
 
 ![Raidlogix-Sample](https://github.com/user-attachments/assets/25dc69df-7591-4fbe-9bf9-d858082d2642)
 
-
 ## Follow these steps to install the application locally:
 
 1. **Clone the Repository**:
