@@ -2,7 +2,7 @@
 db.sqlite3                 # SQLite database file
 *.pem                      # AWS PEM file
 *.pyc                      # Compiled Python files
-__pycache__/               # Python cache directories
+raidapp/raidapp/__pycache__/*               # Python cache directories
 .env                       # Environment variables file (if you use one)
 *.log                      # Log files
 
