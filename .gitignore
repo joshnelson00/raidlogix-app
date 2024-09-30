@@ -1,12 +1,15 @@
-raidapp/.venv/                   # Virtual environment
+# Python and Django related
+raidapp/.venv/                     # Virtual environment
 db.sqlite3                 # SQLite database file
 *.pem                      # AWS PEM file
 *.pyc                      # Compiled Python files
-raidapp/raidapp/__pycache__/*               # Python cache directories
+__pycache__/               # Python cache directories
 .env                       # Environment variables file (if you use one)
 *.log                      # Log files
-
+.DS_Store
+# Django migrations (optional, if you regenerate them)
 raidapp/raidlogix/migrations/*
-!raidapp/raidlogix/migrations/__init__.py 
+!raidapp/raidlogix/migrations/__init__.py  # Keep the __init__.py file
 
-docker-compose.override.yml 
+# Local Docker files
+docker-compose.override.yml  # If you have overrides for local development
