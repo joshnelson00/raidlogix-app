@@ -9,4 +9,4 @@ __pycache__/
 raidapp/raidlogix/migrations/*
 !raidapp/raidlogix/migrations/__init__.py  # Keep the __init__.py file
 docker-compose.override.yml  
-
+Raidlogix-Sample.png
