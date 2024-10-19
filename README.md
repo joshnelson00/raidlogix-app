@@ -3,6 +3,8 @@
 
 ## A full functional RAID attribute manager for product/project managers looking to stay organized and efficient
 
+### Website located at [raidlogix.app](https://raidlogix.app/)
+
 This project is a web application designed to help product and project managers efficiently organize and manage RAID (Risks, Assumptions, Issues, Dependencies) attributes across various projects. Built using Django for the backend, the application offers a streamlined interface for tracking and updating RAID logs. Docker is used to containerize the application, making it easily deployable, while AWS EC2 provides a scalable cloud environment for hosting. The goal is to provide a centralized, user-friendly platform for managing project uncertainties and dependencies in real-time. This project was created by using the following procedures:
 
 * Developed the backend using Django by creating models, implemented views, and integrating authentication to handle user's requests
